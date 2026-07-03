@@ -1,0 +1,7 @@
+.DS_Store
+__pycache__/
+*.pyc
+.venv/
+~$*
+_build_stamp.json
+_probe_stamp.json
