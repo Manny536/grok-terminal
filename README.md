@@ -99,7 +99,7 @@ MPR PASS ≠  RH progress    Kill-filter pass ≠ zero proof
 
 | Repo | URL | Role |
 |------|-----|------|
-| **peaice-index** | https://github.com/Manny536/peaice-index | Hosted program index · KNS UI |
+| **peaice-index** | https://github.com/Manny536/peaice-index | Hosted program index · KNS UI · **Grok Terminal tab wired** @ `a54c596` |
 | **kakeyalogic** | https://github.com/Manny536/kakeyalogic | EEV3 / L²_C public layer |
 | **claude-v6** | https://github.com/Manny536/claude-v6 | Theorem-facing ledger |
 
