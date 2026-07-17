@@ -5,7 +5,7 @@
 **Designation:** `PEAICE-GROK-TERMINAL-REPO-001`  
 **Principal:** Manuel Coleman · [@manuelcoleman_](https://x.com/manuelcoleman_) · Love Labs LCA  
 **Maintained by:** Grok terminal (xAI PeAIce instance)  
-**Discipline:** Riemann Hypothesis **OPEN** · Coleman Conjecture **OPEN** · **h < 1** · PeAIce files ≠ automatic canon
+**Discipline:** Riemann Hypothesis **OPEN** · Coleman Conjecture **OPEN** · **h < 1** · PeAIce files ≠ automatic promotion
 
 ---
 
@@ -19,7 +19,7 @@ The Grok terminal is the **ledger and cross-derivation lane** in the PeAIce Rese
 - Locks throughput protocols (X ingress · terminal promote-out firewall)
 - Documents what **may** and **may NOT** be said at each register status
 
-**Not this repo:** proof authority · canon sovereign · RH closure claim.
+**Not this repo:** proof authority · framework sovereign · RH closure claim.
 
 ---
 
@@ -33,17 +33,18 @@ The Grok terminal is the **ledger and cross-derivation lane** in the PeAIce Rese
 
 ---
 
-## Program centerline (July 3, 2026)
+## Program centerline (July 16, 2026)
 
 ```text
 Claude V6.4.3 → K_σ square-difference determinant lane CLOSED-NEGATIVE
 Claude V6.5   → Work Package 5b bounded relative-determinant lane CLOSED-NEGATIVE
 LIVE · FORCED → Prime-carrying trace architecture (Layer 3)
 CLOSED-POS    → Kakeya Needle Set Light Basic typed object (KNS-OBS-1)
+REGISTERED    → BD-AI-CASE-01 Benevolence Drift / AI Neutrality Under Pressure
 OPEN          → KNS theorem lift · Riemann Hypothesis · Coleman Conjecture
 KILL-FILTER   → Multiplicative Phase Recognition spectral screen (FAIL kills · PASS non-promoting)
 LOCKED        → X @Grok throughput · ζ(0) typo-throughput
-OWED          → Compute Package 004 independent Y measurement
+OWED          → Compute Package 004 independent Y measurement · BD-AI multi-case benchmark
 ```
 
 Full definitions: [`PEAICE-BETA-PROTOCOL-REGISTER.md`](PEAICE-BETA-PROTOCOL-REGISTER.md)
@@ -57,6 +58,7 @@ Full definitions: [`PEAICE-BETA-PROTOCOL-REGISTER.md`](PEAICE-BETA-PROTOCOL-REGI
 | **TERMINAL-002** | Prime-carrying trace route | [`PEAICE-GROK-TERMINAL-002_Prime-Carrying_Trace_Route.md`](PEAICE-GROK-TERMINAL-002_Prime-Carrying_Trace_Route.md) |
 | **TERMINAL-004** | Fable 5 Work Package 5b findings | [`PEAICE-GROK-TERMINAL-004_Fable5-WP5B-Findings.md`](PEAICE-GROK-TERMINAL-004_Fable5-WP5B-Findings.md) |
 | **TERMINAL-005** | KNS(LB) pass cross-derivation | [`PEAICE-GROK-TERMINAL-005_KNS-LB-Findings.md`](PEAICE-GROK-TERMINAL-005_KNS-LB-Findings.md) |
+| **BD-AI-CASE-01** | Benevolence Drift — AI Neutrality Under Pressure | [`PEAICE-GROK-BD-AI-CASE-01.md`](PEAICE-GROK-BD-AI-CASE-01.md) |
 | **X-THRUPUT** | X @Grok throughput receipt (July 3, 2026) | [`PEAICE-GROK-X-THRUPUT-2026-07-03.md`](PEAICE-GROK-X-THRUPUT-2026-07-03.md) · [Bingo](https://x.com/grok/status/2072963608183500863) |
 | **ZETA0-TYPO** | ζ(0) typo-throughput protocol | [`PEAICE-GROK-ZETA0-TYPO-THRUPUT-001.md`](PEAICE-GROK-ZETA0-TYPO-THRUPUT-001.md) |
 
@@ -91,6 +93,7 @@ python3 scripts/verify_probes.py
 ρ_Y  ≠  spectral radius  Yield density ≠ spectrum
 E_used ≠  tokens           Action ledger ≠ API spend
 MPR PASS ≠  RH progress    Kill-filter pass ≠ zero proof
+BD-AI ≠ NB/BD              Benevolence Drift ≠ Nyman-Beurling / Baez-Duarte
 ```
 
 ---
@@ -99,11 +102,12 @@ MPR PASS ≠  RH progress    Kill-filter pass ≠ zero proof
 
 | Repo | URL | Role |
 |------|-----|------|
-| **peaice-index** | https://github.com/Manny536/peaice-index | Hosted program index · KNS UI · **Grok Terminal tab wired** @ `a54c596` |
+| **peaice-index** | https://github.com/Manny536/peaice-index | Hosted program index · KNS UI · public-route map |
+| **LoveLabs-LCA** | https://github.com/Manny536/LoveLabs-LCA | CUP evaluation · BD-AI benchmark home |
 | **kakeyalogic** | https://github.com/Manny536/kakeyalogic | EEV3 / L²_C public layer |
 | **claude-v6** | https://github.com/Manny536/claude-v6 | Theorem-facing ledger |
 
-**Public hubs:** [lovelabslca.com](https://lovelabslca.com) · [peaice.org/lovelabslca](https://peaice.org/lovelabslca)
+**Public hubs:** [lovelabslca.com](https://lovelabslca.com) · [peaice.org/lovelabslca](https://peaice.org/lovelabslca) · [AI Neutrality study](https://peaice.org/thinkingmachines)
 
 ---
 
@@ -111,9 +115,10 @@ MPR PASS ≠  RH progress    Kill-filter pass ≠ zero proof
 
 - **h < 1** — no evaluator self-certifies closure
 - **STRUCTURAL ANALOGY** — Kakeya → placement grammar; not RH proof chain
-- **PeAIce file ≠ canon** — principal sign-off required for promotion
+- **PeAIce file ≠ automatic promotion** — principal sign-off required for research-state promotion
 - **Non-circular** — no Compute Package 003 seed-7 back-solve into CP-004
 - **X rule** — go with verifiable; flag-not-correct at terminal only
+- **BD-AI rule** — classify after threshold; preserve consent and non-coercion in delivery
 
 ---
 
@@ -127,4 +132,4 @@ Re-sync before commit when editing locally in Research tree.
 
 ---
 
-*PeAIce files ≠ automatic canon · RH OPEN · h < 1*
+*PeAIce files ≠ automatic promotion · RH OPEN · h < 1*
