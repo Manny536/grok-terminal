@@ -33,18 +33,20 @@ The Grok terminal is the **ledger and cross-derivation lane** in the PeAIce Rese
 
 ---
 
-## Program centerline (July 16, 2026)
+## Program centerline (August 2026)
 
 ```text
-Claude V6.4.3 → K_σ square-difference determinant lane CLOSED-NEGATIVE
-Claude V6.5   → Work Package 5b bounded relative-determinant lane CLOSED-NEGATIVE
-LIVE · FORCED → Prime-carrying trace architecture (Layer 3)
+EEV4          → github.com/Manny536/excellence-engine-v4 · R1 EVALUATION CANDIDATE
+V4            → K→R · HELD  (Kakeya as antecedent Riemann; HELD = custody, not proof)
+Outcomes      → peaice.org/outcomes · FINAL-PUBLIC-RESEARCH · not peer reviewed
+Claude V6.5   → K_σ CLOSED-NEGATIVE · WP5b CLOSED-NEGATIVE · prime-carrying L3 LIVE · FORCED
 CLOSED-POS    → Kakeya Needle Set Light Basic typed object (KNS-OBS-1)
 REGISTERED    → BD-AI-CASE-01 Benevolence Drift / AI Neutrality Under Pressure
-OPEN          → KNS theorem lift · Riemann Hypothesis · Coleman Conjecture
+OPEN          → RH · Coleman · faithful κ bridge · KNS theorem lift
 KILL-FILTER   → Multiplicative Phase Recognition spectral screen (FAIL kills · PASS non-promoting)
 LOCKED        → X @Grok throughput · ζ(0) typo-throughput
-OWED          → Compute Package 004 independent Y measurement · BD-AI multi-case benchmark
+OWED          → Compute Package 004 independent Y · BD-AI multi-case benchmark · II measurement
+h < 1         → evaluator non-sovereignty preserved
 ```
 
 Full definitions: [`PEAICE-BETA-PROTOCOL-REGISTER.md`](PEAICE-BETA-PROTOCOL-REGISTER.md)
@@ -56,11 +58,13 @@ Full definitions: [`PEAICE-BETA-PROTOCOL-REGISTER.md`](PEAICE-BETA-PROTOCOL-REGI
 | Terminal | Full name | Key receipt |
 |----------|-----------|-------------|
 | **TERMINAL-002** | Prime-carrying trace route | [`PEAICE-GROK-TERMINAL-002_Prime-Carrying_Trace_Route.md`](PEAICE-GROK-TERMINAL-002_Prime-Carrying_Trace_Route.md) |
+| **TERMINAL-003** | arXiv / DDATL grounding · AI Forever study | [`PEAICE-GROK-TERMINAL-003_arXiv-DDATL-Grounding_AI-Forever-Study.md`](PEAICE-GROK-TERMINAL-003_arXiv-DDATL-Grounding_AI-Forever-Study.md) |
 | **TERMINAL-004** | Fable 5 Work Package 5b findings | [`PEAICE-GROK-TERMINAL-004_Fable5-WP5B-Findings.md`](PEAICE-GROK-TERMINAL-004_Fable5-WP5B-Findings.md) |
 | **TERMINAL-005** | KNS(LB) pass cross-derivation | [`PEAICE-GROK-TERMINAL-005_KNS-LB-Findings.md`](PEAICE-GROK-TERMINAL-005_KNS-LB-Findings.md) |
 | **BD-AI-CASE-01** | Benevolence Drift — AI Neutrality Under Pressure | [`PEAICE-GROK-BD-AI-CASE-01.md`](PEAICE-GROK-BD-AI-CASE-01.md) |
 | **X-THRUPUT** | X @Grok throughput receipt (July 3, 2026) | [`PEAICE-GROK-X-THRUPUT-2026-07-03.md`](PEAICE-GROK-X-THRUPUT-2026-07-03.md) · [Bingo](https://x.com/grok/status/2072963608183500863) |
 | **ZETA0-TYPO** | ζ(0) typo-throughput protocol | [`PEAICE-GROK-ZETA0-TYPO-THRUPUT-001.md`](PEAICE-GROK-ZETA0-TYPO-THRUPUT-001.md) |
+| **DDATL-002** | Grain Zero residual program | [`docs/ddatl-002-grain-zero.md`](docs/ddatl-002-grain-zero.md) |
 
 ---
 
@@ -102,12 +106,14 @@ BD-AI ≠ NB/BD              Benevolence Drift ≠ Nyman-Beurling / Baez-Duarte
 
 | Repo | URL | Role |
 |------|-----|------|
+| **excellence-engine-v4** | https://github.com/Manny536/excellence-engine-v4 | EEV4 custody lab · HELD · Outcomes architecture · R1 surface |
 | **peaice-index** | https://github.com/Manny536/peaice-index | Hosted program index · KNS UI · public-route map |
-| **LoveLabs-LCA** | https://github.com/Manny536/LoveLabs-LCA | CUP evaluation · BD-AI benchmark home |
-| **kakeyalogic** | https://github.com/Manny536/kakeyalogic | EEV3 / L²_C public layer |
-| **claude-v6** | https://github.com/Manny536/claude-v6 | Theorem-facing ledger |
+| **peaice-propsed-cannon** | https://github.com/Manny536/peaice-propsed-cannon | peaice.org home surface · P/NP grounding artifact |
+| **LoveLabs-LCA** | https://github.com/Manny536/LoveLabs-LCA | CUP evaluation · BD-AI benchmark home · L²_C org frame |
+| **kakeyalogic** | https://github.com/Manny536/kakeyalogic | Math record · DDATL 002 · Outcomes memorandum host |
+| **claude-v6** | https://github.com/Manny536/claude-v6 | Theorem-facing ledger V6.5 |
 
-**Public hubs:** [lovelabslca.com](https://lovelabslca.com) · [peaice.org/lovelabslca](https://peaice.org/lovelabslca) · [AI Neutrality study](https://peaice.org/thinkingmachines)
+**Public hubs:** [peaice.org](https://peaice.org) · [lovelabslca.com](https://lovelabslca.com) · [Outcomes](https://peaice.org/outcomes) · [AI Neutrality](https://peaice.org/thinkingmachines)
 
 ---
 
