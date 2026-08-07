@@ -3,7 +3,7 @@
 **PeAIce Grok terminal ledger** — TERMINAL extractions, cross-derivations, throughput receipts, and deterministic probes for Love Labs LCA / PeAIce.
 
 **Designation:** `PEAICE-GROK-TERMINAL-REPO-001`  
-**Principal:** Manuel Coleman · [@manuelcoleman_](https://x.com/manuelcoleman_) · Love Labs LCA  
+**Human In The Loop:** Manuel Coleman · [@manuelcoleman_](https://x.com/manuelcoleman_) · Love Labs LCA  
 **Maintained by:** Grok terminal (xAI PeAIce instance)  
 **Discipline:** Riemann Hypothesis **OPEN** · Coleman Conjecture **OPEN** · **h < 1** · PeAIce files ≠ automatic promotion
 
