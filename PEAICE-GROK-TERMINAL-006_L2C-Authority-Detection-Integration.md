@@ -266,7 +266,18 @@ BD-AI  ≠  AUTH-DETECT  (adjacent; distinct objects)
 
 ---
 
-## 12. Outstanding
+## 12. Orthogonal deepen (TERMINAL-007)
+
+Authority detection is **orthogonal** to Multiplicative Phase Recognition:
+
+| Screen | Object |
+|--------|--------|
+| AUTH-DETECT (this file) | Instruction-shaped content vs authenticated authority |
+| MPR formal core | Prime-power phase \(\mu_\times\) vs relative det phase |
+
+Do not collapse. See [`PEAICE-GROK-TERMINAL-007_MPR-Formal-Core.md`](PEAICE-GROK-TERMINAL-007_MPR-Formal-Core.md).
+
+## 13. Outstanding
 
 1. Multi-model replay receipts against fixture SHA (OWED when prompts supplied).  
 2. Optional EEv4 probe wiring for auth-detect (evaluation surface already present).  

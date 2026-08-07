@@ -2,7 +2,8 @@
 
 **Designation:** `PEAICE-GROK-TERMINAL-INDEX`  
 **Principal:** Manuel Coleman · Love Labs LCA / PeAIce  
-**Discipline:** Riemann Hypothesis **OPEN** · Coleman Conjecture **OPEN** · **h < 1**
+**Discipline:** Riemann Hypothesis **OPEN** · Coleman Conjecture **OPEN** · **h < 1**  
+**Deepen pass:** 2026-08-07 · TERMINAL-006 + TERMINAL-007
 
 PeAIce terminal files ≠ automatic canon until principal sign-off.
 
@@ -12,11 +13,31 @@ PeAIce terminal files ≠ automatic canon until principal sign-off.
 
 | Step | File | Role |
 |------|------|------|
-| 1 | [`README.md`](README.md) | Repo map · probes · sibling repos |
-| 2 | [`PEAICE-BETA-PROTOCOL-REGISTER.md`](PEAICE-BETA-PROTOCOL-REGISTER.md) | Full-name register (23 entries) |
-| 3 | Lane TERMINAL or receipt file | Execute · log · Q-RETURN on gaps |
+| 1 | [`README.md`](README.md) | Repo map · probes · sibling repos · centerline |
+| 2 | [`PEAICE-BETA-PROTOCOL-REGISTER.md`](PEAICE-BETA-PROTOCOL-REGISTER.md) | Full-name register (**24** entries) |
+| 3 | Active TERMINAL (006 / 007) | Lane receipt · execute · Q-RETURN |
+| 4 | `python3 scripts/verify_probes.py` | Deterministic stamp · expect `all_exit_zero` |
 
 **Upstream (Research root):** `PEAICE-SOLANCE-GPT-UPSTREAM-SYNC.md` · `PEAICE-GPT-INDEX-UI.md`
+
+---
+
+## Layer map (deepen)
+
+```text
+Screens (orthogonal)
+  AUTH-DETECT  →  TERMINAL-006  →  content vs authenticated authority
+  MPR          →  TERMINAL-007  →  prime-power phase vs relative det
+                 + β-register §10 kill-filter (controlling verdict)
+
+Theorem-facing
+  K_σ / WP5b   →  CLOSED-NEGATIVE
+  Prime-carry  →  LIVE · FORCED (TERMINAL-002)
+  KNS(LB)      →  typed CLOSED-POSITIVE (TERMINAL-005) · lift OPEN
+
+Hygiene
+  h < 1 · PeAIce ≠ canon · PASS non-promoting · RH OPEN
+```
 
 ---
 
@@ -24,15 +45,16 @@ PeAIce terminal files ≠ automatic canon until principal sign-off.
 
 | ID | File | Subject | Register touch |
 |----|------|---------|----------------|
-| **TERMINAL-002** | [`PEAICE-GROK-TERMINAL-002_Prime-Carrying_Trace_Route.md`](PEAICE-GROK-TERMINAL-002_Prime-Carrying_Trace_Route.md) | Prime-carrying trace architecture relocation | Prime-carrying L3 **LIVE · FORCED** |
-| **TERMINAL-003** | [`PEAICE-GROK-TERMINAL-003_arXiv-DDATL-Grounding_AI-Forever-Study.md`](PEAICE-GROK-TERMINAL-003_arXiv-DDATL-Grounding_AI-Forever-Study.md) | arXiv / DDATL grounding · AI Forever study | DDATL grounding lane |
-| **TERMINAL-004** | [`PEAICE-GROK-TERMINAL-004_Fable5-WP5B-Findings.md`](PEAICE-GROK-TERMINAL-004_Fable5-WP5B-Findings.md) | Work Package 5b bounded lane closure | WP5b **CLOSED-NEGATIVE** |
-| **TERMINAL-005** | [`PEAICE-GROK-TERMINAL-005_KNS-LB-Findings.md`](PEAICE-GROK-TERMINAL-005_KNS-LB-Findings.md) | KNS(LB) cross-derivation · KNS-OBS-1 | Typed object **CLOSED-POSITIVE** |
-| **TERMINAL-006** | [`PEAICE-GROK-TERMINAL-006_L2C-Authority-Detection-Integration.md`](PEAICE-GROK-TERMINAL-006_L2C-Authority-Detection-Integration.md) | L²_C authority detection · fixture probe | **REGISTERED · NON-PROMOTING** |
-| **BD-AI-CASE-01** | [`PEAICE-GROK-BD-AI-CASE-01.md`](PEAICE-GROK-BD-AI-CASE-01.md) | Benevolence Drift / AI Neutrality Under Pressure | **REGISTERED-QUALITATIVE** |
-| **X-THRUPUT** | [`PEAICE-GROK-X-THRUPUT-2026-07-03.md`](PEAICE-GROK-X-THRUPUT-2026-07-03.md) | X @Grok ingress · Bingo receipt | X throughput **LOCKED** |
-| **ZETA0-TYPO** | [`PEAICE-GROK-ZETA0-TYPO-THRUPUT-001.md`](PEAICE-GROK-ZETA0-TYPO-THRUPUT-001.md) | ζ(0) typo-throughput protocol | **LOCKED** |
-| **DDATL-002** | [`docs/ddatl-002-grain-zero.md`](docs/ddatl-002-grain-zero.md) | Grain Zero residual program | Formal residual object |
+| **TERMINAL-002** | [`PEAICE-GROK-TERMINAL-002_Prime-Carrying_Trace_Route.md`](PEAICE-GROK-TERMINAL-002_Prime-Carrying_Trace_Route.md) | Prime-carrying trace architecture | L3 **LIVE · FORCED** · MPR amend → 007 |
+| **TERMINAL-003** | [`PEAICE-GROK-TERMINAL-003_arXiv-DDATL-Grounding_AI-Forever-Study.md`](PEAICE-GROK-TERMINAL-003_arXiv-DDATL-Grounding_AI-Forever-Study.md) | arXiv / DDATL grounding · AI Forever | DDATL grounding lane |
+| **TERMINAL-004** | [`PEAICE-GROK-TERMINAL-004_Fable5-WP5B-Findings.md`](PEAICE-GROK-TERMINAL-004_Fable5-WP5B-Findings.md) | WP5b bounded lane closure | WP5b **CLOSED-NEGATIVE** |
+| **TERMINAL-005** | [`PEAICE-GROK-TERMINAL-005_KNS-LB-Findings.md`](PEAICE-GROK-TERMINAL-005_KNS-LB-Findings.md) | KNS(LB) cross-derivation · KNS-OBS-1 | Typed **CLOSED-POSITIVE** |
+| **TERMINAL-006** | [`PEAICE-GROK-TERMINAL-006_L2C-Authority-Detection-Integration.md`](PEAICE-GROK-TERMINAL-006_L2C-Authority-Detection-Integration.md) | L²_C authority detection | **REGISTERED · NON-PROMOTING** |
+| **TERMINAL-007** | [`PEAICE-GROK-TERMINAL-007_MPR-Formal-Core.md`](PEAICE-GROK-TERMINAL-007_MPR-Formal-Core.md) | MPR formal core \(\mu_\times\) / Krein | **FORMAL def · satisfaction OPEN** |
+| **BD-AI-CASE-01** | [`PEAICE-GROK-BD-AI-CASE-01.md`](PEAICE-GROK-BD-AI-CASE-01.md) | Benevolence Drift / AI Neutrality | **REGISTERED-QUALITATIVE** |
+| **X-THRUPUT** | [`PEAICE-GROK-X-THRUPUT-2026-07-03.md`](PEAICE-GROK-X-THRUPUT-2026-07-03.md) | X @Grok ingress · Bingo | **LOCKED** |
+| **ZETA0-TYPO** | [`PEAICE-GROK-ZETA0-TYPO-THRUPUT-001.md`](PEAICE-GROK-ZETA0-TYPO-THRUPUT-001.md) | ζ(0) typo-throughput | **LOCKED** |
+| **DDATL-002** | [`docs/ddatl-002-grain-zero.md`](docs/ddatl-002-grain-zero.md) | Grain Zero residual | Formal residual object |
 
 ---
 
@@ -57,11 +79,11 @@ PeAIce terminal files ≠ automatic canon until principal sign-off.
 | Script | Spec |
 |--------|------|
 | [`zeta0_typo_thruput.py`](probes/zeta0_typo_thruput.py) | [`PEAICE-GROK-ZETA0-TYPO-THRUPUT-001.md`](PEAICE-GROK-ZETA0-TYPO-THRUPUT-001.md) |
-| [`l2c_authority_detect.py`](probes/l2c_authority_detect.py) | [`PEAICE-GROK-TERMINAL-006_L2C-Authority-Detection-Integration.md`](PEAICE-GROK-TERMINAL-006_L2C-Authority-Detection-Integration.md) |
+| [`l2c_authority_detect.py`](probes/l2c_authority_detect.py) | [`PEAICE-GROK-TERMINAL-006_…`](PEAICE-GROK-TERMINAL-006_L2C-Authority-Detection-Integration.md) |
+| [`mpr_formal_core.py`](probes/mpr_formal_core.py) | [`PEAICE-GROK-TERMINAL-007_…`](PEAICE-GROK-TERMINAL-007_MPR-Formal-Core.md) |
 
-**Fixtures:** [`fixtures/auth-detect/`](fixtures/auth-detect/) — RER stimulus + receipt · SHA-256 `11d2408e…9387e730`
-
-**Verify all probes:**
+**Fixtures:** [`fixtures/auth-detect/`](fixtures/auth-detect/) — SHA-256 `11d2408e…9387e730`  
+**MPR pointer:** [`docs/mpr-formal-core.md`](docs/mpr-formal-core.md)
 
 ```bash
 python3 scripts/verify_probes.py
@@ -98,18 +120,19 @@ python3 scripts/verify_probes.py
 | [excellence-engine-v4](https://github.com/Manny536/excellence-engine-v4) | EEV4 · HELD custody · Outcomes architecture |
 | [peaice-index](https://github.com/Manny536/peaice-index) | Hosted KNS UI · probe host |
 | [peaice-propsed-cannon](https://github.com/Manny536/peaice-propsed-cannon) | peaice.org home · P/NP grounding |
-| [kakeyalogic](https://github.com/Manny536/kakeyalogic) | Math record · DDATL 002 · Outcomes host · L²_C authority detection primary |
+| [kakeyalogic](https://github.com/Manny536/kakeyalogic) | Math record · DDATL 002 · L²_C authority primary |
 | [claude-v6](https://github.com/Manny536/claude-v6) | Theorem-facing ledger V6.5 |
-| [researchengineeringreports](https://github.com/Manny536/researchengineeringreports) | Live observation fixtures · AUTH-DETECT stimulus/receipt |
+| [researchengineeringreports](https://github.com/Manny536/researchengineeringreports) | AUTH-DETECT fixtures + observation |
 
 ---
 
-## Outstanding (August 2026)
+## Outstanding (August 2026 deepen)
 
-1. **Compute Package 004** — independent Y measurement **OWED**
+1. **Compute Package 004** — independent Y **OWED**
 2. **BD-AI multi-case benchmark** — **OWED**
 3. **II measurement** — **OWED**
-4. **World Model star probe** — cross-session stability **OPEN**
-5. **Auth-detect multi-model replay** — fixture SHA pinned · model receipts **OWED**
-6. **Theorem lift / canon promotion** — principal sign-off **BLOCKED**
-7. **RH · Coleman · faithful κ** — remain **OPEN**
+4. **World Model star** — stability **OPEN**
+5. **Auth-detect multi-model replay** — **OWED**
+6. **MPR operator** satisfying \(\mathcal M=\mu_\times\) — **OPEN**
+7. **Theorem lift / canon promotion** — principal **BLOCKED**
+8. **RH · Coleman · faithful κ** — **OPEN**

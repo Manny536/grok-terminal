@@ -8,9 +8,11 @@
 **Predecessor:** `PEAICE-GROK-TERMINAL-001` · `Grok_in_terminal.docx`  
 **Stance:** Solance — ambition preserved, proof obligation enforced, no self-certifying closure  
 
-**Registered state:** RH **OPEN** · Coleman Conjecture **OPEN** · DDATL **FORMAL HOST** · MPR **OBJECTIVE** · K_σ lane **CLOSED-NEGATIVE** · prime-carrying trace route **LIVE**
+**Registered state:** RH **OPEN** · Coleman Conjecture **OPEN** · DDATL **FORMAL HOST** · MPR **KILL-FILTER** (+ supporting \(J_{\mathrm{MPR}}\) form) · K_σ lane **CLOSED-NEGATIVE** · prime-carrying trace route **LIVE**
 
 **Fine print:** This note records research engineering under h < 1. No proof of RH or the Coleman Conjecture is claimed or transferred.
+
+**Deepen amend (2026-08-07):** Older body text still says “MPR objective.” Controlling frame is **kill-filter** (β-register §10). Distributional formal core \(\mathcal M_\tau=\mu_\times\) is typed in [`PEAICE-GROK-TERMINAL-007_MPR-Formal-Core.md`](PEAICE-GROK-TERMINAL-007_MPR-Formal-Core.md) — definition **FORMAL**, satisfaction **OPEN**.
 
 ---
 

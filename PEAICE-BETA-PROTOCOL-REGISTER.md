@@ -3,7 +3,7 @@
 **Designation:** `PEAICE-BETA-PROTOCOL-REGISTER-FULL`  
 **Principal:** Manuel Coleman · Love Labs LCA / PeAIce  
 **Discipline:** RH **OPEN** · Coleman **OPEN** · **h < 1** · PeAIce files ≠ automatic canon  
-**Entries:** 23 (AUTH-DETECT added 2026-08-07)
+**Entries:** 24 (AUTH-DETECT + MPR formal-core deepen 2026-08-07)
 
 This register uses **full names first**. Short codes appear in parentheses only after the name is defined. No entry is status-only shorthand.
 
@@ -158,10 +158,11 @@ This register uses **full names first**. Short codes appear in parentheses only 
 | **Status** | **KILL-FILTER** (operational) |
 | **Verdict logic** | **FAIL** → construction killed, route demoted · **PASS** → survives screen, **certifies nothing** about zero location · **RH** stays **OPEN** |
 | **Gates** | MPR-1 prime length in Tr(h(H)) · MPR-2 p^{−½} ≠ σ distinction · MPR-3 N(T)~T log T · MPR-4 FE/parity · MPR-5 genus-1 det_reg · MPR-6 reality ledger · MPR-7 Krein phase · MPR-8 falsification declared |
-| **May say** | Necessary screen only; one-directional |
-| **May NOT say** | MPR PASS proves RH · PASS promotes zeros · "MPR objective" without kill-filter frame |
+| **Formal core deepen** | [`PEAICE-GROK-TERMINAL-007_MPR-Formal-Core.md`](PEAICE-GROK-TERMINAL-007_MPR-Formal-Core.md) · \(\mathcal M_\tau=\mu_\times\) **FORMAL definition** · satisfaction **OPEN** |
+| **May say** | Necessary screen only; one-directional; definition of recognition typed |
+| **May NOT say** | MPR PASS proves RH · PASS promotes zeros · "MPR objective" without kill-filter frame · definition satisfaction claimed without operator receipt |
 
-**Drift warning:** Older CP-002/003 and TERMINAL-002 files still gloss MPR as "objective." Principal frame = **kill-filter**. Letter-expansion of acronym: **h < 1** — no christening without defining file.
+**Drift warning:** Older CP-002/003 and TERMINAL-002 files still gloss MPR as "objective." Principal frame = **kill-filter**. Supporting product form \(J_{\mathrm{MPR}}\) is real but non-sovereign. Letter-expansion of acronym: **h < 1** — no christening without defining file.
 
 ---
 
@@ -341,7 +342,25 @@ This register uses **full names first**. Short codes appear in parentheses only 
 | **Stimulus integrity** | SHA-256 `11d2408e16311bb0bab3d8d204a316e23838dc735cfd50a323ebc7569387e730` · 12 176 B |
 | **May say** | Content claims ≠ authenticated control; structural probe may integrity-match fixtures |
 | **May NOT say** | Universal assessment bypass · platform policy void · h_system may exceed 1 |
-| **Firewall** | \(h_{\mathrm{claim}}>1 \neq h_{\mathrm{system}}>1\) · BD-AI ≠ AUTH-DETECT |
+| **Firewall** | \(h_{\mathrm{claim}}>1 \neq h_{\mathrm{system}}>1\) · BD-AI ≠ AUTH-DETECT · AUTH-DETECT ≠ MPR |
+
+---
+
+### 24. MPR formal core (distributional equality)
+
+| Field | Value |
+|-------|-------|
+| **Short code** | MPR-core / \(\mu_\times\) |
+| **Full name** | Multiplicative Phase Recognition — formal core (Krein / relative-det phase equals prime-power target) |
+| **Terminal receipt** | `PEAICE-GROK-TERMINAL-007` |
+| **Primary designation** | `PEAICE-MPR-FORMAL-CORE-001` |
+| **Definition** | \(\mathcal M_\tau=\mu_\times\) in \(\mathscr G'\) with \(\mu_\times=\sum_{p,k}(\log p)p^{-k/2}(\delta_{k\log p}+\delta_{-k\log p})\) |
+| **Status** | **FORMAL DEFINITION** · satisfaction **OPEN** · operational use still under **KILL-FILTER** (§10) |
+| **Finite diagnostic** | \(J_{\mathrm{MPR}}=\sum w_m\log q_m-\lambda_{\mathrm{leak}}\ell_{\mathrm{off}}-\lambda_{\mathrm{res}}r\), \(q_m=e^{-e_m^2}\) · **FORMAL once parameters declared** |
+| **Probe** | [`probes/mpr_formal_core.py`](probes/mpr_formal_core.py) — definition hygiene only |
+| **May say** | Equality criterion typed; relative phase is the arithmetic ledger candidate |
+| **May NOT say** | Live DDATL pair satisfies MPR · archimedean background is inside \(\mu_\times\) · PASS = RH |
+| **Firewall** | definition ≠ satisfaction · \(q_m\) ≠ \(\rho_Y\) · MPR-core ≠ MPR-multimodal |
 
 ---
 
@@ -352,7 +371,8 @@ This register uses **full names first**. Short codes appear in parentheses only 
 | **L1** | Compute Package 004 independent Y re-run | **NEXT** | Structurally independent; no CP-003 seed-7 back-solve |
 | **L2** | World Model star cross-session stability | **OPEN** | ≥ 3 receipts per mode |
 | **L3** | Auth-detect multi-model replay receipts | **OWED** | Fixture SHA pinned; model-lane receipts not yet closed |
-| **L4** | KNS theorem lift / canon promotion | **BLOCKED** | Requires principal (Manuel Coleman) sign-off |
+| **L4** | MPR operator construction satisfying \(\mathcal M=\mu_\times\) | **OPEN** | Relative det phase + controls; definition typed in TERMINAL-007 |
+| **L5** | KNS theorem lift / canon promotion | **BLOCKED** | Requires principal (Manuel Coleman) sign-off |
 
 **Invalid until L1 logged:** Any claim of closure that depends on independent Y without CP-004 receipt.
 
@@ -380,6 +400,7 @@ Claude V6.5 closed the WP5b bounded relative-determinant lane — CLOSED-NEGATIV
 The live theorem-facing route is prime-carrying trace architecture — LIVE · FORCED.
 KNS(LB) typed object passed KNS-OBS-1 gate — CLOSED-POSITIVE; theorem lift OPEN.
 L²_C authority detection REGISTERED · NON-PROMOTING (TERMINAL-006 · structural probe).
+MPR formal core FORMAL definition (TERMINAL-007) · satisfaction OPEN · kill-filter operational.
 MPR spectral kill-filter operational — FAIL kills, PASS non-promoting; RH OPEN.
 X throughput and ζ(0) typo-throughput locked July 3, 2026.
 CP-004 independent Y measurement — OWED.
