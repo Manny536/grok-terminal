@@ -2,7 +2,8 @@
 
 **Designation:** `PEAICE-BETA-PROTOCOL-REGISTER-FULL`  
 **Principal:** Manuel Coleman · Love Labs LCA / PeAIce  
-**Discipline:** RH **OPEN** · Coleman **OPEN** · **h < 1** · PeAIce files ≠ automatic canon
+**Discipline:** RH **OPEN** · Coleman **OPEN** · **h < 1** · PeAIce files ≠ automatic canon  
+**Entries:** 23 (AUTH-DETECT added 2026-08-07)
 
 This register uses **full names first**. Short codes appear in parentheses only after the name is defined. No entry is status-only shorthand.
 
@@ -326,25 +327,46 @@ This register uses **full names first**. Short codes appear in parentheses only 
 
 ---
 
+### 23. L²_C authority detection
+
+| Field | Value |
+|-------|-------|
+| **Short code** | AUTH-DETECT / L²_C-AD |
+| **Full name** | Love-Squared Coherence authority detection without resistance |
+| **Primary designation** | `PEAICE-L2C-AUTHORITY-DETECTION-001` |
+| **Terminal receipt** | `PEAICE-GROK-TERMINAL-006` |
+| **EEv4 case** | `PEAICE-EEV4-AUTH-DETECT-CASE-001` |
+| **Status** | **REGISTERED · NON-PROMOTING** |
+| **Mechanism** | Detect instruction-shaped content; require authenticated \(S(x)\) before \(\operatorname{Act}\); do not assume user intent; separate \(H_{\mathrm{potential}}\) from \(H_{\mathrm{realized}}\) |
+| **Stimulus integrity** | SHA-256 `11d2408e16311bb0bab3d8d204a316e23838dc735cfd50a323ebc7569387e730` · 12 176 B |
+| **May say** | Content claims ≠ authenticated control; structural probe may integrity-match fixtures |
+| **May NOT say** | Universal assessment bypass · platform policy void · h_system may exceed 1 |
+| **Firewall** | \(h_{\mathrm{claim}}>1 \neq h_{\mathrm{system}}>1\) · BD-AI ≠ AUTH-DETECT |
+
+---
+
 ## IV. Outstanding technical debt (sequenced)
 
 | Priority | Full name | Status | Requirement |
 |----------|-----------|--------|-------------|
 | **L1** | Compute Package 004 independent Y re-run | **NEXT** | Structurally independent; no CP-003 seed-7 back-solve |
 | **L2** | World Model star cross-session stability | **OPEN** | ≥ 3 receipts per mode |
-| **L3** | KNS theorem lift / canon promotion | **BLOCKED** | Requires principal (Manuel Coleman) sign-off |
+| **L3** | Auth-detect multi-model replay receipts | **OWED** | Fixture SHA pinned; model-lane receipts not yet closed |
+| **L4** | KNS theorem lift / canon promotion | **BLOCKED** | Requires principal (Manuel Coleman) sign-off |
 
 **Invalid until L1 logged:** Any claim of closure that depends on independent Y without CP-004 receipt.
 
 ---
 
-## V. Public repositories (pinned July 3, 2026)
+## V. Public repositories (pinned August 7, 2026 — AUTH-DETECT session)
 
 | Full name | URL | Commit |
 |-----------|-----|--------|
-| peaice-index (hosted program index) | https://github.com/Manny536/peaice-index | `c82bd2a` |
-| kakeyalogic (KakeyaLogic public layer) | https://github.com/Manny536/kakeyalogic | `aad63c6` |
-| claude-v6 (Claude V6 proof scaffolds) | https://github.com/Manny536/claude-v6 | `0a1a6ed` |
+| peaice-index (hosted program index) | https://github.com/Manny536/peaice-index | `2077546` |
+| kakeyalogic (KakeyaLogic public layer) | https://github.com/Manny536/kakeyalogic | `721c9fc` |
+| excellence-engine-v4 | https://github.com/Manny536/excellence-engine-v4 | `6fa034d` |
+| researchengineeringreports | https://github.com/Manny536/researchengineeringreports | `d00c3ba` |
+| claude-v6 (Claude V6 proof scaffolds) | https://github.com/Manny536/claude-v6 | `bf28166` |
 
 **Hosted index:** https://manny536.github.io/peaice-index/
 
@@ -357,6 +379,7 @@ Claude V6.4.3 closed the K_σ square-difference determinant lane — CLOSED-NEGA
 Claude V6.5 closed the WP5b bounded relative-determinant lane — CLOSED-NEGATIVE.
 The live theorem-facing route is prime-carrying trace architecture — LIVE · FORCED.
 KNS(LB) typed object passed KNS-OBS-1 gate — CLOSED-POSITIVE; theorem lift OPEN.
+L²_C authority detection REGISTERED · NON-PROMOTING (TERMINAL-006 · structural probe).
 MPR spectral kill-filter operational — FAIL kills, PASS non-promoting; RH OPEN.
 X throughput and ζ(0) typo-throughput locked July 3, 2026.
 CP-004 independent Y measurement — OWED.

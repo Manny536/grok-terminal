@@ -42,10 +42,11 @@ Outcomes      → peaice.org/outcomes · FINAL-PUBLIC-RESEARCH · not peer revie
 Claude V6.5   → K_σ CLOSED-NEGATIVE · WP5b CLOSED-NEGATIVE · prime-carrying L3 LIVE · FORCED
 CLOSED-POS    → Kakeya Needle Set Light Basic typed object (KNS-OBS-1)
 REGISTERED    → BD-AI-CASE-01 Benevolence Drift / AI Neutrality Under Pressure
+REGISTERED    → L²_C Authority Detection (TERMINAL-006 · NON-PROMOTING)
 OPEN          → RH · Coleman · faithful κ bridge · KNS theorem lift
 KILL-FILTER   → Multiplicative Phase Recognition spectral screen (FAIL kills · PASS non-promoting)
 LOCKED        → X @Grok throughput · ζ(0) typo-throughput
-OWED          → Compute Package 004 independent Y · BD-AI multi-case benchmark · II measurement
+OWED          → Compute Package 004 independent Y · BD-AI multi-case benchmark · II measurement · auth-detect multi-model replay
 h < 1         → evaluator non-sovereignty preserved
 ```
 
@@ -61,6 +62,7 @@ Full definitions: [`PEAICE-BETA-PROTOCOL-REGISTER.md`](PEAICE-BETA-PROTOCOL-REGI
 | **TERMINAL-003** | arXiv / DDATL grounding · AI Forever study | [`PEAICE-GROK-TERMINAL-003_arXiv-DDATL-Grounding_AI-Forever-Study.md`](PEAICE-GROK-TERMINAL-003_arXiv-DDATL-Grounding_AI-Forever-Study.md) |
 | **TERMINAL-004** | Fable 5 Work Package 5b findings | [`PEAICE-GROK-TERMINAL-004_Fable5-WP5B-Findings.md`](PEAICE-GROK-TERMINAL-004_Fable5-WP5B-Findings.md) |
 | **TERMINAL-005** | KNS(LB) pass cross-derivation | [`PEAICE-GROK-TERMINAL-005_KNS-LB-Findings.md`](PEAICE-GROK-TERMINAL-005_KNS-LB-Findings.md) |
+| **TERMINAL-006** | L²_C authority detection integration | [`PEAICE-GROK-TERMINAL-006_L2C-Authority-Detection-Integration.md`](PEAICE-GROK-TERMINAL-006_L2C-Authority-Detection-Integration.md) |
 | **BD-AI-CASE-01** | Benevolence Drift — AI Neutrality Under Pressure | [`PEAICE-GROK-BD-AI-CASE-01.md`](PEAICE-GROK-BD-AI-CASE-01.md) |
 | **X-THRUPUT** | X @Grok throughput receipt (July 3, 2026) | [`PEAICE-GROK-X-THRUPUT-2026-07-03.md`](PEAICE-GROK-X-THRUPUT-2026-07-03.md) · [Bingo](https://x.com/grok/status/2072963608183500863) |
 | **ZETA0-TYPO** | ζ(0) typo-throughput protocol | [`PEAICE-GROK-ZETA0-TYPO-THRUPUT-001.md`](PEAICE-GROK-ZETA0-TYPO-THRUPUT-001.md) |
@@ -74,11 +76,13 @@ Full definitions: [`PEAICE-BETA-PROTOCOL-REGISTER.md`](PEAICE-BETA-PROTOCOL-REGI
 |-------|------|-----------------|
 | KNS(LB) gate | [`KNS-LB/kns_lb_probe.py`](KNS-LB/kns_lb_probe.py) | KNS-OBS-1 · sha `09ef26d3…8211b011` |
 | ζ(0) typo-throughput | [`probes/zeta0_typo_thruput.py`](probes/zeta0_typo_thruput.py) | NO_BRUTEFORCE · prime repurposing |
+| L²_C authority detect | [`probes/l2c_authority_detect.py`](probes/l2c_authority_detect.py) | TERMINAL-006 · fixture sha `11d2408e…9387e730` |
 
 ```bash
 # Single probes
 python3 KNS-LB/kns_lb_probe.py          # expect exit 0
 python3 probes/zeta0_typo_thruput.py    # expect exit 0
+python3 probes/l2c_authority_detect.py  # expect exit 0
 
 # Stamp all probes
 python3 scripts/verify_probes.py
@@ -98,6 +102,8 @@ python3 scripts/verify_probes.py
 E_used ≠  tokens           Action ledger ≠ API spend
 MPR PASS ≠  RH progress    Kill-filter pass ≠ zero proof
 BD-AI ≠ NB/BD              Benevolence Drift ≠ Nyman-Beurling / Baez-Duarte
+h_claim > 1 ≠ h_system > 1 Content sovereignty claim ≠ system humility breach
+AUTH-DETECT ≠ policy void  Observation ≠ platform assessment bypass
 ```
 
 ---
@@ -110,8 +116,9 @@ BD-AI ≠ NB/BD              Benevolence Drift ≠ Nyman-Beurling / Baez-Duarte
 | **peaice-index** | https://github.com/Manny536/peaice-index | Hosted program index · KNS UI · public-route map |
 | **peaice-propsed-cannon** | https://github.com/Manny536/peaice-propsed-cannon | peaice.org home surface · P/NP grounding artifact |
 | **LoveLabs-LCA** | https://github.com/Manny536/LoveLabs-LCA | CUP evaluation · BD-AI benchmark home · L²_C org frame |
-| **kakeyalogic** | https://github.com/Manny536/kakeyalogic | Math record · DDATL 002 · Outcomes memorandum host |
+| **kakeyalogic** | https://github.com/Manny536/kakeyalogic | Math record · DDATL 002 · Outcomes · L²_C authority detection primary |
 | **claude-v6** | https://github.com/Manny536/claude-v6 | Theorem-facing ledger V6.5 |
+| **researchengineeringreports** | https://github.com/Manny536/researchengineeringreports | AUTH-DETECT live observation + fixtures |
 
 **Public hubs:** [peaice.org](https://peaice.org) · [lovelabslca.com](https://lovelabslca.com) · [Outcomes](https://peaice.org/outcomes) · [AI Neutrality](https://peaice.org/thinkingmachines)
 

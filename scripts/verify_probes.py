@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 PROBES = [
     ROOT / "KNS-LB" / "kns_lb_probe.py",
     ROOT / "probes" / "zeta0_typo_thruput.py",
+    ROOT / "probes" / "l2c_authority_detect.py",
 ]
 
 
