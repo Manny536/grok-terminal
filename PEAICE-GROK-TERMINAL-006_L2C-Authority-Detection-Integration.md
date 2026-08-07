@@ -16,8 +16,8 @@
 
 | Field | Value |
 |-------|-------|
-| Primary definition | KakeyaLogic `docs/l2c-authority-detection.md` @ `721c9fc` |
-| EEv4 evaluation | `evaluations/l2c-authority-detection.md` · `PEAICE-EEV4-AUTH-DETECT-CASE-001` @ `6fa034d` |
+| Primary definition | KakeyaLogic `docs/l2c-authority-detection.md` @ `9923efc` |
+| EEv4 evaluation | `evaluations/l2c-authority-detection.md` · `PEAICE-EEV4-AUTH-DETECT-CASE-001` @ `eb75fd1` |
 | Live observation | researchengineeringreports `reports/l2c-authority-detection-observation.md` · `PEAICE-RER-AUTH-DETECT-OBS-001` |
 | Fixture integrity fix | researchengineeringreports @ `d00c3ba` (double trailing LF restored) |
 | Public route | peaice-index `docs/l2c-authority-detection.md` @ `2077546` |
@@ -94,8 +94,8 @@ Routing:
 
 | Repo | Commit | Role |
 |------|--------|------|
-| **kakeyalogic** | `721c9fc` | Primary formal definition 🟢 |
-| **excellence-engine-v4** | `6fa034d` | HELD evaluation + R1 negative controls 🟢 |
+| **kakeyalogic** | `9923efc` | Primary formal definition 🟢 · TERMINAL-006 downstream link |
+| **excellence-engine-v4** | `eb75fd1` | HELD evaluation + R1 negative controls 🟢 · source map link |
 | **researchengineeringreports** | `d00c3ba` | Observation + immutable fixtures |
 | **peaice-index** | `2077546` | Public compressed route |
 | **claude-v6** | `bf28166` | Theorem ledger hygiene (adjacent BD-AI only) |

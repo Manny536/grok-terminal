@@ -363,8 +363,8 @@ This register uses **full names first**. Short codes appear in parentheses only 
 | Full name | URL | Commit |
 |-----------|-----|--------|
 | peaice-index (hosted program index) | https://github.com/Manny536/peaice-index | `2077546` |
-| kakeyalogic (KakeyaLogic public layer) | https://github.com/Manny536/kakeyalogic | `721c9fc` |
-| excellence-engine-v4 | https://github.com/Manny536/excellence-engine-v4 | `6fa034d` |
+| kakeyalogic (KakeyaLogic public layer) | https://github.com/Manny536/kakeyalogic | `9923efc` |
+| excellence-engine-v4 | https://github.com/Manny536/excellence-engine-v4 | `eb75fd1` |
 | researchengineeringreports | https://github.com/Manny536/researchengineeringreports | `d00c3ba` |
 | claude-v6 (Claude V6 proof scaffolds) | https://github.com/Manny536/claude-v6 | `bf28166` |
 
