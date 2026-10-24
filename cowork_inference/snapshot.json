@@ -1,0 +1,49 @@
+{
+  "observed_on": "2026-10-23",
+  "observer": "grok-terminal",
+  "not_observer": "grok-bot",
+  "org_repo_committed": false,
+  "sponsorship": {
+    "seat": "principal",
+    "product_line": "Solutions Partner - Digital & App Innovation",
+    "cap_usd": 10000,
+    "card_used_usd": 2007,
+    "card_remaining_usd": 7993,
+    "usage_table_spend_usd": 2006.78,
+    "usage_window_start": "2026-08-13",
+    "usage_window_end": "2026-10-24",
+    "offer_end": "2027-07-01",
+    "days_until_offer_end_observed": 252,
+    "subscriptions": 1,
+    "monthly_sheet_posted_usd": 1520.0,
+    "monthly_sheet_posted_on": "2026-10-06",
+    "meter": "azure_sponsorship_total_not_cowork_token_ledger"
+  },
+  "monthly_sheet": {
+    "surface": "Loop page titled Azure Sponsorship Spending",
+    "row_count_observed": 5,
+    "sum_usd_observed": 4920,
+    "september_dated_rows": 1,
+    "september_dated_row_is_principal_seat": false,
+    "other_seats_copied": false
+  },
+  "cowork": {
+    "surface": "Microsoft 365 Copilot Cowork, My tasks",
+    "september_tasks": [
+      {
+        "title": "Create and Document Personal Skill",
+        "last_activity": "2026-09-25",
+        "prompt_text_stored": false,
+        "usage_export": false
+      }
+    ]
+  },
+  "teams": ["Marketing", "Sales", "Delivery", "HR", "IT", "MISC"],
+  "missing_inputs": [
+    "Graph Copilot usage reports",
+    "Analytics CSV",
+    "Studio/AOAI logs",
+    "exact user prompts",
+    "cross-team prompt corpus"
+  ]
+}
