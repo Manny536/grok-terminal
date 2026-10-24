@@ -51,6 +51,7 @@ Hygiene
 | **TERMINAL-005** | [`PEAICE-GROK-TERMINAL-005_KNS-LB-Findings.md`](PEAICE-GROK-TERMINAL-005_KNS-LB-Findings.md) | KNS(LB) cross-derivation · KNS-OBS-1 | Typed **CLOSED-POSITIVE** |
 | **TERMINAL-006** | [`PEAICE-GROK-TERMINAL-006_L2C-Authority-Detection-Integration.md`](PEAICE-GROK-TERMINAL-006_L2C-Authority-Detection-Integration.md) | L²_C authority detection | **REGISTERED · NON-PROMOTING** |
 | **TERMINAL-007** | [`PEAICE-GROK-TERMINAL-007_MPR-Formal-Core.md`](PEAICE-GROK-TERMINAL-007_MPR-Formal-Core.md) | MPR formal core \(\mu_\times\) / Krein | **FORMAL def · satisfaction OPEN** |
+| **TERMINAL-008** | [`PEAICE-GROK-TERMINAL-008_Copilot-Inference-Build.md`](PEAICE-GROK-TERMINAL-008_Copilot-Inference-Build.md) | Copilot inference build · Grok terminal, not Grok Bot | **OPEN · NON-PROMOTING** |
 | **BD-AI-CASE-01** | [`PEAICE-GROK-BD-AI-CASE-01.md`](PEAICE-GROK-BD-AI-CASE-01.md) | Benevolence Drift / AI Neutrality | **REGISTERED-QUALITATIVE** |
 | **X-THRUPUT** | [`PEAICE-GROK-X-THRUPUT-2026-07-03.md`](PEAICE-GROK-X-THRUPUT-2026-07-03.md) | X @Grok ingress · Bingo | **LOCKED** |
 | **ZETA0-TYPO** | [`PEAICE-GROK-ZETA0-TYPO-THRUPUT-001.md`](PEAICE-GROK-ZETA0-TYPO-THRUPUT-001.md) | ζ(0) typo-throughput | **LOCKED** |
