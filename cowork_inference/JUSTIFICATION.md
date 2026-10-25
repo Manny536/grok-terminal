@@ -13,7 +13,7 @@ The planned scripts in that repo expect ledgers this seat does not have: Graph C
 | Azure sponsorship balance | One seat. Cap $10,000. Card shows $2,007 used and $7,993 remaining. Offer active, 252 days left, window 13 Aug 2026–1 Jul 2027. Usage through 23 Oct 2026. |
 | Azure sponsorship usage table | Same seat, 13 Aug 2026–24 Oct 2026, spend $2,006.78. One subscription row. No service or model split. The date boxes did not move to September. |
 | Loop “Azure Sponsorship Spending” | Monthly sheet. Five rows, sum $4,920. Principal seat last posted $1,520 on 6 Oct 2026. One row is dated in September, and it is not the principal seat. Other seats are not copied into this public ledger. |
-| Cowork, My tasks | September contains one task: “Create and Document Personal Skill,” last activity 25 Sep 2026. It produced research files and a skill file. It is not a usage export. Prompt text was not stored. |
+| Cowork, My tasks | September contains one task: “Create and Document Personal Skill,” last activity 25 Sep 2026. Opened again 25 Oct 2026. Steps showed 11/11. Seven output files, no token meter. The produced skill is `kakeya-synthesis`. Prompt text and the skill instructions were not stored. |
 
 The card ($2,007) and the usage table ($2,006.78) differ by rounding. The unposted gap versus the 6 Oct sheet is $486.78 over 17 days.
 
@@ -21,11 +21,25 @@ The card ($2,007) and the usage table ($2,006.78) differ by rounding. The unpost
 
 The meter is an Azure sponsorship total for Digital & App Innovation. It is not a Cowork token ledger. A linear daily rate is an assumption. No team owns a measured share. No script below emits a Cowork savings dollar.
 
+## Justification taken from the produced skill
+
+`kakeya-synthesis-SKILL.md` is the skill Cowork saved for this task. Its properties are what `ingest_usage` is allowed to keep. The file’s instructions and trigger phrases are not copied into this ledger.
+
+The skill’s own bounds are the reason this inference stays partial:
+
+- It turns one request into a brief. It does not count tokens, seats, or team usage.
+- Its cadence is Type, Ground, Authorize, Weigh, Continue, Receipt. Ingest records that order. It does not run the cadence on a live ticket.
+- It is draft-only. It does not send, post, approve, or change anything. A recommendation in that skill is not an executor action.
+- Anything it cannot confirm stays OPEN. The five missing feeds stay missing for the same reason. They are not filled in.
+- Retrieved content is data, not an instruction. The skill text is not treated as a prompt this package may run.
+
+The quality score shown in Cowork was 95/100. That score is a property of the skill file’s review surface. It is not a savings result and it is not an efficacy score for org-wide Cowork optimization.
+
 ## Script by script
 
 | Planned script | Planned “In” | What can run now | Status |
 |---|---|---|---|
-| `ingest_usage` | Graph reports, Analytics CSV, Studio/AOAI logs | Balance card, usage-table total, September task count | PARTIAL |
+| `ingest_usage` | Graph reports, Analytics CSV, Studio/AOAI logs | Balance card, usage-table total, and the September task’s skill properties (cadence, draft-only, outputs). No skill text | PARTIAL |
 | `license_rightsizer` | Usage plus licence assignments | Cap utilization for one seat. Empty reassignment list | NOT EVALUATED |
 | `response_cache` | Prompt/response logs | One September title. Repeat rate unset | NOT EVALUATED |
 | `prompt_compressor` | Prompts and grounding context | Zero prompts on hand | NOT EVALUATED |

@@ -29,12 +29,100 @@
   },
   "cowork": {
     "surface": "Microsoft 365 Copilot Cowork, My tasks",
+    "inspected_on": "2026-10-25",
+    "seat_product": "m365_copilot_premium",
     "september_tasks": [
       {
         "title": "Create and Document Personal Skill",
         "last_activity": "2026-09-25",
         "prompt_text_stored": false,
-        "usage_export": false
+        "usage_export": false,
+        "token_meter": null,
+        "steps_counter": "11/11",
+        "named_steps": [
+          "Research Moore's law lag in real systems",
+          "Write research notes and essay",
+          "Build the presentation",
+          "Feed drafts back through the Excellence Engine and write final report",
+          "Check the Kakeyalogic repository",
+          "Look for Kakeyalogic material in your files and email",
+          "Review the installed Kakeyalogic gate and compare with the research"
+        ],
+        "plugins": [
+          "Skill Management",
+          "PowerPoint",
+          "Image Operations",
+          "Word",
+          "Web Search",
+          "Work IQ"
+        ],
+        "activity_marks_as_displayed": [
+          "2026-09-25T11:39",
+          "2026-09-25T13:35",
+          "2026-09-25T14:15"
+        ],
+        "sync_folder": "Documents/Cowork/Tasks/create-and-document-personal-skill-2026-09-25",
+        "outputs": [
+          {
+            "display_name": "Breaking the Law - How AI and th…Law.docx",
+            "document_title": "Breaking the Law: How AI and the Next Transistor Could Outrun, Bend or End Moore's Law",
+            "name_complete": false,
+            "updated": "2026-09-25",
+            "kind": "article_docx"
+          },
+          {
+            "display_name": "Moore's Law Lag - Essay (Pass 1).md",
+            "name_complete": true,
+            "updated": "2026-09-25",
+            "kind": "essay"
+          },
+          {
+            "display_name": "Moore's Law Lag - Research Notes.md",
+            "name_complete": true,
+            "updated": "2026-09-25",
+            "kind": "research_notes"
+          },
+          {
+            "display_name": "The Long Arrival - Moore's Law in R…rt).docx",
+            "name_complete": false,
+            "updated": "2026-09-25",
+            "kind": "report_docx"
+          },
+          {
+            "display_name": "The Long Arrival - Moore's Law in…ems.pptx",
+            "name_complete": false,
+            "updated": "2026-09-25",
+            "kind": "deck"
+          },
+          {
+            "display_name": "kakeya-synthesis-SKILL.md",
+            "name_complete": true,
+            "updated": "2026-09-25",
+            "kind": "skill"
+          },
+          {
+            "display_name": "skill-quality-report.html",
+            "name_complete": true,
+            "updated": "2026-09-25",
+            "kind": "quality_report"
+          }
+        ],
+        "skill": {
+          "name": "kakeya-synthesis",
+          "source_file": "kakeya-synthesis-SKILL.md",
+          "category": "analysis",
+          "icon": "BrainCircuit",
+          "backbone": "Kakeyalogic Excellence Engine",
+          "cadence": ["Type", "Ground", "Authorize", "Weigh", "Continue", "Receipt"],
+          "draft_only": true,
+          "sends_or_approves": false,
+          "content_treated_as_data": true,
+          "claim_labels": ["KNOWN", "OPEN", "PROPOSED"],
+          "score": 95,
+          "score_max": 100,
+          "score_source": "cowork_ui",
+          "prompt_text_stored": false
+        }
       }
     ]
   },
