@@ -24,6 +24,14 @@ that works on a real export is the first piece that can be tested on Copilot.
 3. On real data, the totals printed by the script are compared with the totals the
    admin center shows for the same report window (steps below).
 
+**Goal of the admin center header update.** The reader recognises every column of
+the real admin center "Microsoft 365 Copilot usage by user" export, so a real run
+leaves `columns_unrecognised` empty (apart from Display Name, which is never read).
+**Why.** A real run on 2026-10-26 left the two app columns and the four numeric
+columns unrecognised. **How it is checked.** The real header row is the first line
+of `tests/fixtures/copilot_usage/synthetic_admin_center_usage_by_user.csv` (invented
+rows, UTF-8 BOM) and `tests/test_copilot_usage.py` asserts every header resolves.
+
 **What this does not do.** It does not measure tokens, cost, or savings. It does
 not read prompts. The snapshot fallback is unchanged and still returns PARTIAL.
 Without an export, `ingest()` returns exactly what it returned before.
@@ -51,7 +59,8 @@ Headers are matched on a normalised key (lower case, letters and digits only), s
 `Last Activity Date` (Graph CSV) and `lastActivityDate` (Graph beta JSON) are the same column.
 
 **VERIFIED** means the exact name appears in the Microsoft Learn Graph reference
-(URLs below). **OPEN** means the name is a metric label or a v2 field from those
+(URLs below). **OBSERVED** means the header was seen in a real admin center export
+taken on 2026-10-26 (one tenant). **OPEN** means the name is a metric label or a v2 field from those
 pages, but the exact header in a downloaded file was not checked. The script
 reports, for each field, which header it matched and with which status
 (`column_resolution` in the output). Any column can be overridden with
@@ -69,12 +78,33 @@ then marked CONFIGURED. A configured header that is not in the file stops the ru
 | `copilot_chat` | `Copilot Chat Last Activity Date` | |
 | `copilot_chat_work`, `copilot_chat_web` | none | `Copilot Chat (work) Last Activity Date`, `Copilot Chat (web) Last Activity Date`, and the admin center labels |
 | `m365_app`, `edge`, `copilot_agent` | none | `Microsoft 365 Copilot Last Activity Date`, `Edge Last Activity Date`, `Copilot Agent Last Activity Date`, and the admin center labels |
+| `m365_app` | none | OBSERVED: `Last activity date of Microsoft 365 Copilot (app) (UTC)` |
+| `edge` | none | OBSERVED: `Last activity date of Edge (UTC)` |
+| `prompts_all_apps`, `prompts_chat_work`, `prompts_chat_web`, `active_usage_days_all_apps` | none | OBSERVED: `Prompts submitted for All Apps`, `Prompts submitted for Copilot Chat (work)`, `Prompts submitted for Copilot Chat (web)`, `Active Usage Days for All Apps` (counts, see below) |
+
+### Observed on a real export (2026-10-26)
+
+One real admin center "usage by user" export, one tenant, 28-day window ending
+2026-10-25. Status: OBSERVED. The header row is, in order: Report Refresh Date,
+User Principal Name, Display Name, Last Activity Date, Report Period, the four
+numeric columns above, then `Last activity date of <app> (UTC)` for Copilot Chat
+(work), Copilot Chat (web), Teams Copilot, Word Copilot, Excel Copilot, PowerPoint
+Copilot, Outlook Copilot, OneNote Copilot, Loop Copilot, Microsoft 365 Copilot
+(app) and Edge. The file begins with a UTF-8 BOM, which the reader strips. The
+reader's totals matched the admin center: 62 enabled users, 59 active users. No
+tenant name, user name or email is kept in this repo.
+
+The four numeric columns are read as **admin center counts, not tokens, not cost,
+not savings**: for each, the sum over users and the number of users with a value
+above zero. A blank, negative or non-integer value is left out of the sum, counted
+in `values_excluded_from_sum`, and reported as a warning. No value is guessed.
+They are never stored per user.
 
 Not verified and left OPEN:
-- The exact header text of the admin center **Export** CSV. The admin center page
-  documents the table by metric label, not by file header.
+- The admin center header text for other tenants and report windows. One real
+  export is OBSERVED; the Graph CSV headers for the v2 columns are still OPEN.
 - The exact header text of the v2 columns in a Graph CSV.
-- The date format in the admin center export. The reader accepts `YYYY-MM-DD`
+- The date format is not recorded as checked. The reader accepts `YYYY-MM-DD`
   (or an ISO date-time starting with that). Any other non-empty date is counted
   as `bad_date` and excluded, so a format difference shows up in the accounting.
 
@@ -88,13 +118,14 @@ Sources (read on 2026-10-26):
 
 ## Accounting
 
-Every data row is either accepted or excluded with one reason. Checks run in this order:
+Every data row is either accepted or excluded with one reason. Checks run in this order (`future_date` sits before the duplicate check, so a future-dated row does not reserve its id):
 
 | Reason | Meaning |
 |---|---|
 | `malformed_row` | A JSON item that is not an object. |
 | `missing_user_id` | Empty or blank user principal name. |
 | `bad_date` | A non-empty date field that is not an ISO date. Empty means no activity and is valid. |
+| `future_date` | The last activity date, or an app date, is after the reference date (`as_of`). It is never counted as active. Shown in `excluded_by_reason` only when a row was excluded for it. |
 | `duplicate_user_id` | The id (compared in lower case) was already accepted. The first row wins. A row excluded for another reason does not reserve its id. |
 
 The output holds `input_rows`, `accepted`, `excluded`, `excluded_by_reason`, the
@@ -111,6 +142,7 @@ data row. No ids are listed.
 | `active_per_app.<app>.active_in_window` | Same, using that app's last activity date | Adoption by app, active users |
 | `active_per_app.<app>.with_activity_date` | Rows with a date for that app | none |
 | `never_active` | Rows with no last activity date | none |
+| `admin_center_counts.<field>` | Sum and users with a value above zero for the numeric prompt and usage-day columns | the same columns; counts only, not tokens, not cost, not savings |
 | `idle_seats` | No activity in the last `idle_days` days, or never active | none; this is a script output, not an admin center number |
 
 `as_of` defaults to the latest Report Refresh Date in the file, and `window_days`
@@ -128,6 +160,28 @@ OPEN items for these counts:
 - **Active Users definition.** The admin center counts users who sent a prompt or
   took an intentional action in the window. The last activity date is the only
   signal in this report, so the two are expected to match only when both use the same window.
+
+**Last activity when the overall date is blank or missing.** If a row's overall
+Last Activity Date is blank, the reader uses that user's latest per-app date, so a
+user with recent Word activity is not counted as never active or idle. The count is
+reported as `last_activity_derived_from_apps`, with a warning. If the overall
+column is missing, every row uses its per-app dates. If the file has neither the
+overall column nor any app date column, `never_active`, `users_with_activity_date`,
+`active_users_in_window` and `idle_seats` are `null` (unknown) and the run warns
+`no_activity_columns`; map a column with `--map last_activity=Header`.
+*Goal:* a seat is idle only when the file shows no activity. *Why:* a blank overall
+date next to a recent app date was counted idle. *Checked by:* the tests
+`test_blank_overall_date_with_recent_app_date_is_not_idle_or_never_active`,
+`test_missing_overall_column_derives_from_app_columns` and
+`test_no_activity_columns_means_unknown_not_idle`.
+
+**Dates after the reference date.** A last activity or app date later than `as_of`
+used to pass the window check (the upper bound only). Such a row is now excluded as
+`future_date`, with a warning, and the accounting stays balanced. The window check
+also requires the date to be on or before `as_of`. Rows with normal dates are
+unchanged. *Checked by:* `test_future_last_activity_is_excluded_and_never_counted_active`,
+`test_future_date_uses_a_caller_supplied_as_of_and_does_not_reserve_the_id` and
+`test_normal_rows_report_no_future_date_key`.
 
 **Idle seats.** `idle_days` has no default. The right threshold is a policy choice:
 **value to be set by the data owner.** Without it, `idle_seats` is `null`. An idle
@@ -173,7 +227,7 @@ If you cannot get an export, the same checks run on the synthetic fixtures with
 
 ## Still OPEN
 
-- Exact admin center export headers and date format (above).
+- Admin center export headers beyond the one observed tenant, and the date format (above).
 - The window boundary rule (above).
 - Tokens, cost, and savings: this report has none. Cowork's My tasks page showed no token meter.
 - Analytics CSV, Studio/AOAI logs, exact prompts, and the cross-team prompt corpus.

@@ -15,9 +15,11 @@ Privacy rules this module keeps:
 
 Column names are matched by a normalised key (lower case, letters and digits
 only), so "Last Activity Date" and "lastActivityDate" are the same column.
-Each alias is tagged VERIFIED (shown in the Microsoft Learn Graph reference) or
-OPEN (a documented metric label, or a v2 field, whose exact export header was
-not checked). A caller can override any column with ``column_map``.
+Each alias is tagged VERIFIED (shown in the Microsoft Learn Graph reference),
+OBSERVED (seen in the header row of a real admin center export taken on
+2026-10-26, from one tenant) or OPEN (a documented metric label, or a v2 field,
+whose exact export header was not checked). A caller can override any column
+with ``column_map``.
 Source URLs are listed in cowork_inference/COPILOT_USAGE_INGEST.md.
 """
 
@@ -35,6 +37,7 @@ from pathlib import Path
 SALT_ENV = "COWORK_INFERENCE_SALT"
 
 VERIFIED = "VERIFIED"
+OBSERVED = "OBSERVED"
 OPEN = "OPEN"
 CONFIGURED = "CONFIGURED"
 ABSENT = "ABSENT"
@@ -45,6 +48,10 @@ EXCLUSION_REASONS = (
     "bad_date",
     "malformed_row",
 )
+# Reported in excluded_by_reason only when a row was excluded for it.
+FUTURE_DATE = "future_date"
+
+COUNT_LABEL = "admin center count, not tokens, not cost, not savings"
 
 # canonical field -> ordered (header text, status) aliases.
 COLUMN_ALIASES = {
@@ -60,50 +67,65 @@ COLUMN_ALIASES = {
     ),
     "teams": (
         ("Microsoft Teams Copilot Last Activity Date", VERIFIED),
-        ("Last activity date of Teams Copilot (UTC)", OPEN),
+        ("Last activity date of Teams Copilot (UTC)", OBSERVED),
     ),
     "word": (
         ("Word Copilot Last Activity Date", VERIFIED),
-        ("Last activity date of Word Copilot (UTC)", OPEN),
+        ("Last activity date of Word Copilot (UTC)", OBSERVED),
     ),
     "excel": (
         ("Excel Copilot Last Activity Date", VERIFIED),
-        ("Last activity date of Excel Copilot (UTC)", OPEN),
+        ("Last activity date of Excel Copilot (UTC)", OBSERVED),
     ),
     "powerpoint": (
         ("PowerPoint Copilot Last Activity Date", VERIFIED),
-        ("Last activity date of PowerPoint Copilot (UTC)", OPEN),
+        ("Last activity date of PowerPoint Copilot (UTC)", OBSERVED),
     ),
     "outlook": (
         ("Outlook Copilot Last Activity Date", VERIFIED),
-        ("Last activity date of Outlook Copilot (UTC)", OPEN),
+        ("Last activity date of Outlook Copilot (UTC)", OBSERVED),
     ),
     "onenote": (
         ("OneNote Copilot Last Activity Date", VERIFIED),
-        ("Last activity date of OneNote Copilot (UTC)", OPEN),
+        ("Last activity date of OneNote Copilot (UTC)", OBSERVED),
     ),
     "loop": (
         ("Loop Copilot Last Activity Date", VERIFIED),
-        ("Last activity date of Loop Copilot (UTC)", OPEN),
+        ("Last activity date of Loop Copilot (UTC)", OBSERVED),
     ),
     "copilot_chat": (("Copilot Chat Last Activity Date", VERIFIED),),
     "copilot_chat_work": (
         ("Copilot Chat (work) Last Activity Date", OPEN),
-        ("Last activity date of Copilot Chat (work) (UTC)", OPEN),
+        ("Last activity date of Copilot Chat (work) (UTC)", OBSERVED),
     ),
     "copilot_chat_web": (
         ("Copilot Chat (web) Last Activity Date", OPEN),
-        ("Last activity date of Copilot Chat (web) (UTC)", OPEN),
+        ("Last activity date of Copilot Chat (web) (UTC)", OBSERVED),
     ),
     "m365_app": (
         ("Microsoft 365 Copilot Last Activity Date", OPEN),
+        ("Last activity date of Microsoft 365 Copilot (app) (UTC)", OBSERVED),
         ("Last activity date of Microsoft 365 App (UTC)", OPEN),
     ),
     "edge": (
         ("Edge Last Activity Date", OPEN),
+        ("Last activity date of Edge (UTC)", OBSERVED),
         ("Last activity date of Microsoft Edge (UTC)", OPEN),
     ),
     "copilot_agent": (("Copilot Agent Last Activity Date", OPEN),),
+    "prompts_all_apps": (("Prompts submitted for All Apps", OBSERVED),),
+    "prompts_chat_work": (("Prompts submitted for Copilot Chat (work)", OBSERVED),),
+    "prompts_chat_web": (("Prompts submitted for Copilot Chat (web)", OBSERVED),),
+    "active_usage_days_all_apps": (("Active Usage Days for All Apps", OBSERVED),),
+}
+
+# Numeric columns of the admin center export. Used as counts only, never per user.
+# field -> unit
+COUNT_FIELDS = {
+    "prompts_all_apps": "prompts",
+    "prompts_chat_work": "prompts",
+    "prompts_chat_web": "prompts",
+    "active_usage_days_all_apps": "days",
 }
 
 APP_FIELDS = (
@@ -291,7 +313,16 @@ def _cell(row, resolved, field):
 # --- accounting and aggregates ---------------------------------------------
 
 
-def _normalize(rows, resolved, salt):
+_INT = re.compile(r"[0-9]+")
+
+
+def _count(value):
+    """Return an int for a plain non-negative integer text, else None (never guessed)."""
+    text = (value or "").strip()
+    return int(text) if _INT.fullmatch(text) else None
+
+
+def _normalize(rows, resolved, salt, as_of=None):
     accepted, excluded, seen = [], [], set()
     date_fields = ("report_refresh_date", "last_activity") + APP_FIELDS
     for number, row in enumerate(rows, start=1):
@@ -312,6 +343,12 @@ def _normalize(rows, resolved, salt):
         if bad:
             excluded.append({"row": number, "reason": "bad_date"})
             continue
+        if as_of is not None and any(
+            dates[field] is not None and dates[field] > as_of
+            for field in ("last_activity",) + APP_FIELDS
+        ):
+            excluded.append({"row": number, "reason": FUTURE_DATE})
+            continue
         key = user_id.lower()
         if key in seen:
             excluded.append({"row": number, "reason": "duplicate_user_id"})
@@ -321,12 +358,25 @@ def _normalize(rows, resolved, salt):
         raw_period = (_cell(row, resolved, "report_period") or "").strip()
         if raw_period.isdigit():
             period = int(raw_period)
+        # A blank overall date falls back to the latest per-app date, so a user
+        # with recent app activity is not counted as never active.
+        last, derived = dates["last_activity"], False
+        if last is None:
+            app_days = [dates[field] for field in APP_FIELDS if dates[field] is not None]
+            if app_days:
+                last, derived = max(app_days), True
+        counts = {}
+        for field in COUNT_FIELDS:
+            if resolved[field]["header"] is not None:
+                counts[field] = _count(_cell(row, resolved, field))
         accepted.append({
             "user_pseudonym": pseudonymize(user_id, salt),
             "report_refresh_date": dates["report_refresh_date"],
             "report_period": period,
-            "last_activity": dates["last_activity"],
+            "last_activity": last,
+            "last_activity_derived": derived,
             "apps": {field: dates[field] for field in APP_FIELDS},
+            "counts": counts,
         })
     return accepted, excluded
 
@@ -336,7 +386,8 @@ def _iso(value):
 
 
 def _within(day, as_of, window_days):
-    return day is not None and (as_of - day).days < window_days
+    """Active in the window: not after as_of, and fewer than window_days before it."""
+    return day is not None and 0 <= (as_of - day).days < window_days
 
 
 def summarize_export(source, salt=None, as_of=None, window_days=None,
@@ -370,7 +421,7 @@ def summarize_export(source, salt=None, as_of=None, window_days=None,
         summary["column_resolution"] = resolved
         summary["accounting"] = _accounting(0, 0, [])
         summary["users"] = []
-        summary["aggregates"] = _aggregates([], None, None, None)
+        summary["aggregates"] = _aggregates([], None, None, None, True, {})
         return summary
 
     resolved = resolve_columns(headers, column_map)
@@ -379,13 +430,31 @@ def summarize_export(source, salt=None, as_of=None, window_days=None,
             "no user id column found; set column_map={'user_id': '<header>'}. Headers seen: "
             + ", ".join(headers)
         )
-    accepted, excluded = _normalize(rows, resolved, salt)
+    accepted, excluded = _normalize(rows, resolved, salt, as_of)
 
     as_of_source = "argument"
     if as_of is None:
         refresh = [item["report_refresh_date"] for item in accepted if item["report_refresh_date"]]
         as_of = max(refresh) if refresh else None
         as_of_source = "report_refresh_date" if as_of else None
+        if as_of is not None:
+            # Run again with the reference date so a date after it is excluded.
+            accepted, excluded = _normalize(rows, resolved, salt, as_of)
+    future = sum(1 for item in excluded if item["reason"] == FUTURE_DATE)
+    if future:
+        summary["warnings"].append("future_date_rows_excluded:%d" % future)
+    elif as_of is None:
+        summary["warnings"].append("future_dates_not_checked:no_reference_date")
+    activity_known = any(
+        resolved[field]["header"] is not None for field in ("last_activity",) + APP_FIELDS
+    )
+    if not activity_known:
+        summary["warnings"].append("no_activity_columns:map_last_activity_or_app_columns")
+        for item in accepted:
+            item["last_activity"] = None
+    derived = sum(1 for item in accepted if item["last_activity_derived"])
+    if derived:
+        summary["warnings"].append("last_activity_derived_from_app_dates:%d" % derived)
     window_source = "argument"
     if window_days is None:
         periods = {item["report_period"] for item in accepted}
@@ -398,7 +467,7 @@ def summarize_export(source, salt=None, as_of=None, window_days=None,
         idle = None
         if idle_days is not None and as_of is not None:
             last = item["last_activity"]
-            idle = last is None or (as_of - last).days >= idle_days
+            idle = (last is None or (as_of - last).days >= idle_days) if activity_known else None
         users.append({
             "user_pseudonym": item["user_pseudonym"],
             "last_activity_date": _iso(item["last_activity"]),
@@ -418,14 +487,16 @@ def summarize_export(source, salt=None, as_of=None, window_days=None,
     summary["as_of_source"] = as_of_source
     summary["window_days"] = window_days
     summary["window_days_source"] = window_source
-    summary["aggregates"] = _aggregates(accepted, as_of, window_days, idle_days)
+    summary["aggregates"] = _aggregates(
+        accepted, as_of, window_days, idle_days, activity_known, summary["warnings"]
+    )
     return summary
 
 
 def _accounting(total, accepted, excluded):
     by_reason = {reason: 0 for reason in EXCLUSION_REASONS}
     for item in excluded:
-        by_reason[item["reason"]] += 1
+        by_reason[item["reason"]] = by_reason.get(item["reason"], 0) + 1
     return {
         "input_rows": total,
         "accepted": accepted,
@@ -436,9 +507,34 @@ def _accounting(total, accepted, excluded):
     }
 
 
-def _aggregates(accepted, as_of, window_days, idle_days):
-    """Counts to compare with the admin center. No money, no savings."""
-    can_window = as_of is not None and window_days is not None
+def _count_aggregates(accepted, warnings):
+    """Sums and non-zero user counts for the numeric admin center columns. Counts only."""
+    result = {}
+    for field, unit in COUNT_FIELDS.items():
+        if not any(field in item["counts"] for item in accepted):
+            continue
+        values = [item["counts"][field] for item in accepted if field in item["counts"]]
+        good = [value for value in values if value is not None]
+        skipped = len(values) - len(good)
+        if skipped:
+            warnings.append("non_integer_or_blank_values_excluded_from_sum:%s=%d" % (field, skipped))
+        result[field] = {
+            "unit": unit,
+            "sum": sum(good),
+            "users_with_nonzero": sum(1 for value in good if value > 0),
+            "values_excluded_from_sum": skipped,
+            "label": COUNT_LABEL,
+        }
+    return result
+
+
+def _aggregates(accepted, as_of, window_days, idle_days, activity_known=True, warnings=None):
+    """Counts to compare with the admin center. No money, no savings.
+
+    When no activity column is mapped (activity_known is False) the activity
+    counts are None (unknown), not zero and not idle.
+    """
+    can_window = activity_known and as_of is not None and window_days is not None
     per_app = {}
     for field in APP_FIELDS:
         dates = [item["apps"][field] for item in accepted]
@@ -451,18 +547,22 @@ def _aggregates(accepted, as_of, window_days, idle_days):
     last = [item["last_activity"] for item in accepted]
     result = {
         "enabled_users": len(accepted),
-        "users_with_activity_date": sum(1 for day in last if day is not None),
-        "never_active": sum(1 for day in last if day is None),
+        "users_with_activity_date": (
+            sum(1 for day in last if day is not None) if activity_known else None
+        ),
+        "never_active": sum(1 for day in last if day is None) if activity_known else None,
+        "last_activity_derived_from_apps": sum(1 for item in accepted if item["last_activity_derived"]),
         "active_users_in_window": (
             sum(1 for day in last if _within(day, as_of, window_days)) if can_window else None
         ),
         "active_per_app": per_app,
+        "admin_center_counts": _count_aggregates(accepted, [] if warnings is None else warnings),
         "idle_days": idle_days,
         "idle_seats": None,
         "idle_policy": "value to be set by the data owner",
         "window_boundary": "OPEN: active when (as_of - last activity) in days is below window_days",
     }
-    if idle_days is not None and as_of is not None:
+    if activity_known and idle_days is not None and as_of is not None:
         result["idle_seats"] = sum(
             1 for day in last if day is None or (as_of - day).days >= idle_days
         )
