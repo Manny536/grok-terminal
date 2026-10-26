@@ -1,0 +1,80 @@
+{
+  "value": [
+    {
+      "reportRefreshDate": "2026-10-20",
+      "userPrincipalName": "user-301",
+      "displayName": "Synthetic User 301",
+      "lastActivityDate": "2026-10-19",
+      "copilotChatLastActivityDate": "2026-10-19",
+      "microsoftTeamsCopilotLastActivityDate": "2026-10-18",
+      "wordCopilotLastActivityDate": "",
+      "excelCopilotLastActivityDate": "",
+      "powerPointCopilotLastActivityDate": "",
+      "outlookCopilotLastActivityDate": "",
+      "oneNoteCopilotLastActivityDate": "",
+      "loopCopilotLastActivityDate": "",
+      "copilotActivityUserDetailsByPeriod": [
+        {
+          "reportPeriod": 7
+        }
+      ]
+    },
+    {
+      "reportRefreshDate": "2026-10-20",
+      "userPrincipalName": "user-302",
+      "displayName": "Synthetic User 302",
+      "lastActivityDate": "2026-10-16",
+      "copilotChatLastActivityDate": "",
+      "microsoftTeamsCopilotLastActivityDate": "",
+      "wordCopilotLastActivityDate": "2026-10-16",
+      "excelCopilotLastActivityDate": "",
+      "powerPointCopilotLastActivityDate": "",
+      "outlookCopilotLastActivityDate": "",
+      "oneNoteCopilotLastActivityDate": "",
+      "loopCopilotLastActivityDate": "",
+      "copilotActivityUserDetailsByPeriod": [
+        {
+          "reportPeriod": 7
+        }
+      ]
+    },
+    {
+      "reportRefreshDate": "2026-10-20",
+      "userPrincipalName": "user-303",
+      "displayName": "Synthetic User 303",
+      "lastActivityDate": "2026-09-30",
+      "copilotChatLastActivityDate": "",
+      "microsoftTeamsCopilotLastActivityDate": "2026-09-30",
+      "wordCopilotLastActivityDate": "",
+      "excelCopilotLastActivityDate": "",
+      "powerPointCopilotLastActivityDate": "",
+      "outlookCopilotLastActivityDate": "",
+      "oneNoteCopilotLastActivityDate": "",
+      "loopCopilotLastActivityDate": "",
+      "copilotActivityUserDetailsByPeriod": [
+        {
+          "reportPeriod": 7
+        }
+      ]
+    },
+    {
+      "reportRefreshDate": "2026-10-20",
+      "userPrincipalName": "user-304",
+      "displayName": "Synthetic User 304",
+      "lastActivityDate": "",
+      "copilotChatLastActivityDate": "",
+      "microsoftTeamsCopilotLastActivityDate": "",
+      "wordCopilotLastActivityDate": "",
+      "excelCopilotLastActivityDate": "",
+      "powerPointCopilotLastActivityDate": "",
+      "outlookCopilotLastActivityDate": "",
+      "oneNoteCopilotLastActivityDate": "",
+      "loopCopilotLastActivityDate": "",
+      "copilotActivityUserDetailsByPeriod": [
+        {
+          "reportPeriod": 7
+        }
+      ]
+    }
+  ]
+}
