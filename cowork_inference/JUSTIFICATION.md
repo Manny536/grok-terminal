@@ -39,7 +39,7 @@ The quality score shown in Cowork was 95/100. That score is a property of the sk
 
 | Planned script | Planned “In” | What can run now | Status |
 |---|---|---|---|
-| `ingest_usage` | Graph reports, Analytics CSV, Studio/AOAI logs | Balance card, usage-table total, and the September task’s skill properties (cadence, draft-only, outputs). No skill text | PARTIAL |
+| `ingest_usage` | Graph reports, Analytics CSV, Studio/AOAI logs | Balance card, usage-table total, and the September task’s skill properties (cadence, draft-only, outputs). No skill text. With a Copilot usage-by-user export: per-seat rows and counts to check against the admin center ([details](COPILOT_USAGE_INGEST.md)) | PARTIAL |
 | `license_rightsizer` | Usage plus licence assignments | Cap utilization for one seat. Empty reassignment list | NOT EVALUATED |
 | `response_cache` | Prompt/response logs | One September title. Repeat rate unset | NOT EVALUATED |
 | `prompt_compressor` | Prompts and grounding context | Zero prompts on hand | NOT EVALUATED |
@@ -47,3 +47,7 @@ The quality score shown in Cowork was 95/100. That score is a property of the sk
 | `savings_report` | Ledger plus usage | Live spend versus last posted monthly figure | PROPOSED burn, Cowork savings unset |
 
 Teams stay **UNRESOLVED**. A cache, a compressor, or a router would need an opted-in export of prompts and a real inference meter. Those exports are not in this snapshot.
+
+## Copilot usage export reader
+
+`ingest_usage` can now read a Copilot usage-by-user export (admin center CSV, Graph CSV, or Graph beta JSON) and return pseudonymized rows, a row accounting, and counts that can be checked against the admin center. The goal, the reason, how it is checked, the column-name status, and the step-by-step test on real Copilot data are in [`COPILOT_USAGE_INGEST.md`](COPILOT_USAGE_INGEST.md). Status stays PARTIAL. No token, cost, or savings figure comes from this report. Org-wide optimization stays **OPEN**.
