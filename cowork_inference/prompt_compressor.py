@@ -7,8 +7,10 @@ exported. The script refuses a token-savings figure.
 from cowork_inference.ledger import load_snapshot
 
 
-def compressor():
-    missing = load_snapshot()["missing_inputs"]
+def compressor(missing_inputs=None):
+    """``missing_inputs`` defaults to the snapshot list. run_all passes the list
+    after any Copilot usage export has satisfied one of them."""
+    missing = load_snapshot()["missing_inputs"] if missing_inputs is None else list(missing_inputs)
     return {
         "script": "prompt_compressor",
         "status": "NOT_EVALUATED",
