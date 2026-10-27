@@ -391,13 +391,15 @@ def _within(day, as_of, window_days):
 
 
 def summarize_export(source, salt=None, as_of=None, window_days=None,
-                     idle_days=None, column_map=None):
+                     idle_days=None, column_map=None, include_users=True):
     """Normalise one export and return rows, accounting and aggregates.
 
     as_of        reference date. Default: latest Report Refresh Date in the accepted rows.
     window_days  report window. Default: the single Report Period value, if there is one.
     idle_days    a seat is idle with no activity in this many days. No default: the value
                  is to be set by the data owner. Without it, idle seats are not computed.
+    include_users  False leaves out the per-user list (pseudonyms and dates), so the
+                 result holds counts only. ``idle_seat_pseudonyms`` is kept.
     """
     salt = _salt(salt)
     as_of = _as_date(as_of, "as_of")
@@ -422,6 +424,8 @@ def summarize_export(source, salt=None, as_of=None, window_days=None,
         summary["accounting"] = _accounting(0, 0, [])
         summary["users"] = []
         summary["aggregates"] = _aggregates([], None, None, None, True, {})
+        if not include_users:
+            del summary["users"]
         return summary
 
     resolved = resolve_columns(headers, column_map)
@@ -488,8 +492,12 @@ def summarize_export(source, salt=None, as_of=None, window_days=None,
     summary["window_days"] = window_days
     summary["window_days_source"] = window_source
     summary["aggregates"] = _aggregates(
-        accepted, as_of, window_days, idle_days, activity_known, summary["warnings"]
+        accepted, as_of, window_days, idle_days, activity_known, summary["warnings"], resolved
     )
+    if idle_days is not None and summary["aggregates"]["idle_seats"] is not None:
+        summary["idle_seat_pseudonyms"] = [u["user_pseudonym"] for u in users if u["idle"]]
+    if not include_users:
+        del summary["users"]
     return summary
 
 
@@ -528,15 +536,21 @@ def _count_aggregates(accepted, warnings):
     return result
 
 
-def _aggregates(accepted, as_of, window_days, idle_days, activity_known=True, warnings=None):
+def _aggregates(accepted, as_of, window_days, idle_days, activity_known=True, warnings=None,
+                resolved=None):
     """Counts to compare with the admin center. No money, no savings.
 
     When no activity column is mapped (activity_known is False) the activity
-    counts are None (unknown), not zero and not idle.
+    counts are None (unknown), not zero and not idle. When ``resolved`` is given,
+    an app with no column in the export is None (unknown), not zero.
     """
     can_window = activity_known and as_of is not None and window_days is not None
     per_app = {}
     for field in APP_FIELDS:
+        if resolved is not None and resolved[field]["header"] is None:
+            # No column for this app in the export: unknown, not zero.
+            per_app[field] = {"with_activity_date": None, "active_in_window": None}
+            continue
         dates = [item["apps"][field] for item in accepted]
         per_app[field] = {
             "with_activity_date": sum(1 for day in dates if day is not None),
@@ -567,3 +581,59 @@ def _aggregates(accepted, as_of, window_days, idle_days, activity_known=True, wa
             1 for day in last if day is None or (as_of - day).days >= idle_days
         )
     return result
+
+
+# --- per-app reconciliation --------------------------------------------------
+
+# Names used by this script. Match each to an admin center tile by hand.
+APP_LABELS = {
+    "teams": "Microsoft Teams Copilot",
+    "word": "Word Copilot",
+    "excel": "Excel Copilot",
+    "powerpoint": "PowerPoint Copilot",
+    "outlook": "Outlook Copilot",
+    "onenote": "OneNote Copilot",
+    "loop": "Loop Copilot",
+    "copilot_chat": "Copilot Chat",
+    "copilot_chat_work": "Copilot Chat (work)",
+    "copilot_chat_web": "Copilot Chat (web)",
+    "m365_app": "Microsoft 365 Copilot (app)",
+    "edge": "Edge",
+    "copilot_agent": "Copilot Agent",
+}
+
+
+def reconciliation(summary):
+    """Per-app counts laid out for a person to compare with the admin center tiles.
+
+    Counts only. No tile number is stored here: the comparison is done by the
+    data owner. An app with no column in the export has ``active_users`` None
+    (unknown), never zero.
+    """
+    agg = summary["aggregates"]
+    resolved = summary.get("column_resolution") or {}
+    apps = []
+    for field in APP_FIELDS:
+        counts = agg["active_per_app"][field]
+        column = resolved.get(field) or {}
+        apps.append({
+            "app": field,
+            "label": APP_LABELS[field],
+            "column_header": column.get("header"),
+            "column_status": column.get("status", ABSENT),
+            "active_users": counts["active_in_window"],
+            "users_with_activity_date": counts["with_activity_date"],
+        })
+    return {
+        "as_of": summary.get("as_of"),
+        "window_days": summary.get("window_days"),
+        "enabled_users": agg["enabled_users"],
+        "active_users": agg["active_users_in_window"],
+        "per_app": apps,
+        "compare_with": (
+            "Admin center Copilot usage tiles for the same window: Enabled Users, "
+            "Active Users, and Adoption by app. Comparing them is the data owner's step."
+        ),
+        "boundary": agg["window_boundary"],
+        "label": COUNT_LABEL,
+    }

@@ -75,8 +75,13 @@ def _task(task):
 
 
 def ingest(export_path=None, salt=None, as_of=None, window_days=None,
-           idle_days=None, column_map=None):
-    """Snapshot fallback; with ``export_path`` also ingest a Copilot usage export."""
+           idle_days=None, column_map=None, usage=None):
+    """Snapshot fallback; with ``export_path`` also ingest a Copilot usage export.
+
+    ``usage`` is a result of ``summarize_export`` that the caller already has
+    (run_all builds it once for the rightsizer). It is used instead of reading
+    the export again.
+    """
     snap = load_snapshot()
     seat = snap["sponsorship"]
     cowork = snap["cowork"]
@@ -107,11 +112,13 @@ def ingest(export_path=None, salt=None, as_of=None, window_days=None,
         },
     ]
     missing = list(snap["missing_inputs"])
-    if export_path is not None:
-        rows.append(summarize_export(
+    if usage is None and export_path is not None:
+        usage = summarize_export(
             export_path, salt=salt, as_of=as_of, window_days=window_days,
             idle_days=idle_days, column_map=column_map,
-        ))
+        )
+    if usage is not None:
+        rows.append(usage)
         missing = [item for item in missing if item != _EXPORT_SATISFIES]
     return {
         "script": "ingest_usage",

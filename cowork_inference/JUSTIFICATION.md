@@ -4,7 +4,7 @@
 **Org repo:** not committed. `agreeya-org1-scout/CoWork-Inference` is unchanged by this pass.  
 **Org-wide Cowork optimization:** **OPEN**.
 
-The planned scripts in that repo expect ledgers this seat does not have: Graph Copilot usage reports, an Analytics CSV, Studio/AOAI logs, exact prompts, and a cross-team corpus (Marketing, Sales, Delivery, HR, IT, MISC). The scripts here run on the three Chrome surfaces that were open on 2026-10-23.
+The planned scripts in that repo expect ledgers this seat does not have: Graph Copilot usage reports, an Analytics CSV, Studio/AOAI logs, exact prompts, and a cross-team corpus (Marketing, Sales, Delivery, HR, IT, MISC). The scripts here run on the three Chrome surfaces that were open on 2026-10-23. Given a Microsoft 365 Copilot usage-by-user export, they also run on that export: the usage-report input is covered by it, and the other four stay missing.
 
 ## What was visible
 
@@ -40,14 +40,18 @@ The quality score shown in Cowork was 95/100. That score is a property of the sk
 | Planned script | Planned “In” | What can run now | Status |
 |---|---|---|---|
 | `ingest_usage` | Graph reports, Analytics CSV, Studio/AOAI logs | Balance card, usage-table total, and the September task’s skill properties (cadence, draft-only, outputs). No skill text. With a Copilot usage-by-user export: per-seat rows and counts to check against the admin center ([details](COPILOT_USAGE_INGEST.md)) | PARTIAL |
-| `license_rightsizer` | Usage plus licence assignments | Cap utilization for one seat. Empty reassignment list | NOT EVALUATED |
+| `license_rightsizer` | Usage plus licence assignments | Without an export: cap utilization for one seat, empty reassignment list (NOT EVALUATED). With a Copilot usage-by-user export: seats in the export, seats active in the window, idle seats for a caller-supplied number of days, per-app active counts to compare with the admin center ([details](COPILOT_USAGE_INGEST.md)). Unassigned licenses are not in the export and are not inferred | NOT EVALUATED without an export, PARTIAL with one |
 | `response_cache` | Prompt/response logs | One September title. Repeat rate unset | NOT EVALUATED |
 | `prompt_compressor` | Prompts and grounding context | Zero prompts on hand | NOT EVALUATED |
 | `model_router` | Request features | One subscription, no model mix | NOT EVALUATED |
-| `savings_report` | Ledger plus usage | Live spend versus last posted monthly figure | PROPOSED burn, Cowork savings unset |
+| `savings_report` | Ledger plus usage | Live spend versus last posted monthly figure. The export holds prompt counts, not tokens or cost, so it adds nothing here | PROPOSED burn, Cowork savings unset |
 
 Teams stay **UNRESOLVED**. A cache, a compressor, or a router would need an opted-in export of prompts and a real inference meter. Those exports are not in this snapshot.
 
 ## Copilot usage export reader
 
-`ingest_usage` can now read a Copilot usage-by-user export (admin center CSV, Graph CSV, or Graph beta JSON) and return pseudonymized rows, a row accounting, and counts that can be checked against the admin center. The goal, the reason, how it is checked, the column-name status, and the step-by-step test on real Copilot data are in [`COPILOT_USAGE_INGEST.md`](COPILOT_USAGE_INGEST.md). Status stays PARTIAL. No token, cost, or savings figure comes from this report. Org-wide optimization stays **OPEN**.
+`ingest_usage` can now read a Copilot usage-by-user export (admin center CSV, Graph CSV, or Graph beta JSON) and return pseudonymized rows, a row accounting, and counts that can be checked against the admin center. The goal, the reason, how it is checked, the column-name status, and the step-by-step test on real Copilot data are in [`COPILOT_USAGE_INGEST.md`](COPILOT_USAGE_INGEST.md). It was checked once on one real tenant export (taken 2026-10-26, 28-day window ending 2026-10-25): the reader's enabled-user count (62) and active-user count (59) matched the admin center tiles, and the prompt total matched its tile. No tenant name, user name, email or data row is kept in this repo. The per-app tiles are compared by the data owner, using the per-app output described in [`COPILOT_USAGE_INGEST.md`](COPILOT_USAGE_INGEST.md).
+
+`run_all --copilot-export FILE` passes the export's counts to `ingest_usage` and `license_rightsizer`. With no argument `run_all` prints the same snapshot receipt as before. The idle-days value is supplied by the caller; without one, idle seats stay null (value to be set by the data owner).
+
+Status stays PARTIAL. No token, cost, or savings figure comes from this report. Org-wide optimization stays **OPEN**.

@@ -10,10 +10,13 @@
 export and turn it into per-seat rows and counts that anyone can compare with the
 Microsoft 365 admin center.
 
-**Why it is needed.** Until now `ingest_usage.py` only passed through a
-hand-copied `snapshot.json`. It had no Copilot usage data to test against, so
-`license_rightsizer.py` and every later step had nothing to stand on. A reader
-that works on a real export is the first piece that can be tested on Copilot.
+**Why it is needed.** `ingest_usage.py` used to pass through only a
+hand-copied `snapshot.json`, so `license_rightsizer.py` and every later step had no
+Copilot usage data to stand on. A reader that works on a real export is the first
+piece that can be tested on Copilot. It was checked once on one real tenant export
+(2026-10-26, 28-day window ending 2026-10-25): 62 enabled users and 59 active users,
+and the prompt total, matched the admin center tiles. `license_rightsizer.py` and
+`run_all.py` now use the reader's counts (section below).
 
 **How it is checked.**
 1. Synthetic fixtures with known counts (`tests/fixtures/copilot_usage/`) are run in
@@ -139,8 +142,8 @@ data row. No ids are listed.
 | `enabled_users` | Accepted rows | Enabled Users (see the note below) |
 | `users_with_activity_date` | Accepted rows with a non-empty last activity date | none; the date does not depend on the window |
 | `active_users_in_window` | Last activity within `window_days` of `as_of` | Active Users for the same window |
-| `active_per_app.<app>.active_in_window` | Same, using that app's last activity date | Adoption by app, active users |
-| `active_per_app.<app>.with_activity_date` | Rows with a date for that app | none |
+| `active_per_app.<app>.active_in_window` | Same, using that app's last activity date. `null` when the export has no column for that app (unknown, not zero) | Adoption by app, active users |
+| `active_per_app.<app>.with_activity_date` | Rows with a date for that app. `null` when the export has no column for that app | none |
 | `never_active` | Rows with no last activity date | none |
 | `admin_center_counts.<field>` | Sum and users with a value above zero for the numeric prompt and usage-day columns | the same columns; counts only, not tokens, not cost, not savings |
 | `idle_seats` | No activity in the last `idle_days` days, or never active | none; this is a script output, not an admin center number |
@@ -187,6 +190,44 @@ unchanged. *Checked by:* `test_future_last_activity_is_excluded_and_never_counte
 **value to be set by the data owner.** Without it, `idle_seats` is `null`. An idle
 count is a list of seats to look at, not a decision to remove a licence.
 
+## Seats, idle seats, and `run_all`
+
+**Goal.** `license_rightsizer.py` and `run_all.py` use the counts from a real export
+instead of only the sponsorship snapshot. A **seat** is one assigned Microsoft 365
+Copilot license. An **idle seat** is a seat whose holder has no activity, or whose
+last activity is at least `idle_days` days before `as_of`.
+**Why.** The reader's counts had been checked on one real export, but the
+rightsizer and the receipt still described usage as snapshot-only.
+**How it is checked.** `tests/test_wire_real_export.py` runs invented exports through
+`run_all` and `license_rightsizer`. It checks the counts against values known from the
+fixture files, that the no-argument receipt equals a stored copy of the old one
+(`tests/fixtures/cowork_inference/snapshot_receipt.json`), that no name, email or salt
+appears in the receipt, and that idle seats stay `null` without a threshold.
+
+Run it from the repo root:
+
+    export COWORK_INFERENCE_SALT='<a long random string for this tenant>'
+    python3 -m cowork_inference.run_all --copilot-export /path/to/export.csv [--window-days 28] [--as-of YYYY-MM-DD] [--idle-days N]
+
+- `idle_days` has no default. Without it `idle_seats` is `null` and `idle_policy` reads
+  "value to be set by the data owner". Idle at exactly `idle_days` days is the same
+  window-boundary question as above, and stays OPEN.
+- The seats counted are the rows in the export. Unassigned licenses are not in the
+  export, so `unassigned_licenses` is `null` and is not inferred from it.
+- `seats_not_active_in_window` is a plain subtraction. It is not the same as idle seats
+  or never-active seats.
+- Prompt counts are admin center counts, not tokens, not cost, not savings. The
+  sponsorship total is not a Copilot seat cost.
+- The receipt holds counts and salted pseudonyms only. The per-user list is left out
+  of `run_all`; `idle_seat_pseudonyms` lists idle seats by pseudonym. The salt is read
+  only from `COWORK_INFERENCE_SALT`, there is no flag for it, and it is never stored.
+- `per_app_reconciliation` has one entry per app: the column header matched, its
+  status, `active_users` in the window and `users_with_activity_date`. Compare each
+  with the matching admin center tile for the same window. That comparison is the
+  data owner's step; no tile number is stored in this repo. An app with no column in
+  the export shows `null`.
+- Status stays PARTIAL. Org-wide Cowork optimization stays **OPEN**. No savings figure.
+
 ## How to test on real Copilot data
 
 You need a Microsoft 365 admin role that can open usage reports (for example
@@ -223,12 +264,13 @@ Reports Reader or AI Administrator). Do not commit the export. Keep it out of th
 8. **Delete the export** when done.
 
 If you cannot get an export, the same checks run on the synthetic fixtures with
-`python3 -m pytest tests/test_copilot_usage.py`.
+`python3 -m pytest tests/test_copilot_usage.py tests/test_wire_real_export.py`.
 
 ## Still OPEN
 
 - Admin center export headers beyond the one observed tenant, and the date format (above).
-- The window boundary rule (above).
+- The window boundary rule and the idle boundary (above).
+- Per-app comparison with the admin center tiles: the data owner's step.
 - Tokens, cost, and savings: this report has none. Cowork's My tasks page showed no token meter.
 - Analytics CSV, Studio/AOAI logs, exact prompts, and the cross-team prompt corpus.
 - Org-wide Cowork optimization.

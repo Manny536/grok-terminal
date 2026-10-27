@@ -20,4 +20,6 @@ AIce and Kakeyalogic agents reading this repo:
 - September Cowork, on My tasks, is one task (“Create and Document Personal Skill,” 2026-09-25). Opened 2026-10-25: steps 11/11, seven outputs, no token meter. The produced skill is `kakeya-synthesis` (analysis, draft-only, cadence Type → Receipt). Its instructions are not stored. Marketing, Sales, Delivery, HR, IT, and MISC have no prompt corpus here. The skill’s 95/100 Cowork score is not an efficacy score.
 - Scripts and the input snapshot live in [`cowork_inference/`](cowork_inference/). Justification: [`cowork_inference/JUSTIFICATION.md`](cowork_inference/JUSTIFICATION.md). Run `python3 -m cowork_inference.run_all` from the repo root.
 
+- Update 2026-10-26: `run_all --copilot-export FILE` also reads a Microsoft 365 Copilot usage-by-user export (counts and salted pseudonyms only). The reader was checked on one real tenant export. Details: [`cowork_inference/COPILOT_USAGE_INGEST.md`](cowork_inference/COPILOT_USAGE_INGEST.md). Status stays PARTIAL; org-wide Cowork optimization stays **OPEN**; the burn delta above is unchanged and is still not a Cowork savings figure.
+
 PeAIce files are not canon until the principal signs off. h < 1 stands. This note does not authorize a deploy.
