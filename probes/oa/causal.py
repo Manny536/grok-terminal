@@ -182,6 +182,7 @@ def happened_before(a: Mapping[str, int], b: Mapping[str, int]) -> bool:
 
 
 def concurrent(a: Mapping[str, int], b: Mapping[str, int]) -> bool:
+    # pylint: disable-next=arguments-out-of-order  # (b, a) is deliberate: both directions checked
     return not happened_before(a, b) and not happened_before(b, a) and dict(a) != dict(b)
 
 

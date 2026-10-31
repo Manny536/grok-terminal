@@ -11,7 +11,7 @@ def run(m=None):
     if m:
         env["OA_MUTANT"] = m
     p = subprocess.run([sys.executable, "-m", "pytest", "-q", "-p", "no:cacheprovider",
-                        "tests/test_oa_probe.py"], cwd=ROOT, env=env, capture_output=True, text=True)
+                        "tests/test_oa_probe.py"], cwd=ROOT, env=env, capture_output=True, text=True, check=False)
     return p.returncode, (p.stdout.strip().splitlines() or [""])[-1]
 
 

@@ -34,7 +34,7 @@ def run(scheme, delta, seed, n, c, sample=MIN_SAMPLE, timeout=RUN_TIMEOUT):
     signal.setitimer(signal.ITIMER_REAL, timeout)
     try:
         return _run(scheme, delta, seed, n, c, sample)
-    except Exception as e:      # noqa: BLE001 -- recorded, fails P9
+    except Exception as e:      # noqa: BLE001  # pylint: disable=broad-exception-caught  # recorded, fails P9
         return {"failure": "%s: %s" % (type(e).__name__, e)}
     finally:
         signal.setitimer(signal.ITIMER_REAL, 0)
@@ -118,7 +118,7 @@ def check(res, deltas):
                                  for r in res["elastic"][str(d)]) <= 2,
         "P10": fails == 0 and all(r.get("reorder_violations", 1) == 0 for r in runs),
     }
-    return {k: ok(bool(v) if v == v else False) for k, v in c.items()}
+    return {k: ok(bool(v) if not (isinstance(v, float) and math.isnan(v)) else False) for k, v in c.items()}
 
 
 def compute(timeout=RUN_TIMEOUT, budget=TOTAL_BUDGET):

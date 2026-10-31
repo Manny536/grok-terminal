@@ -97,7 +97,8 @@ class TestPaperStructure:
 
     def test_funnel_lookup_stays_under_bound_where_uniform_does_not(self):
         f, u = O.FunnelHashing(4096, 5, delta=1 / 64), O.UniformProbing(4096, 5)
-        fill(f, 4096 - 64), fill(u, 4096 - 64)
+        fill(f, 4096 - 64)
+        fill(u, 4096 - 64)
         assert max(f.search_pc.values()) <= f.lookup_bound
         assert max(u.search_pc.values()) > 64
 
@@ -285,7 +286,7 @@ PREREG_SHA256 = "0bbecb50e7ff3dc27ee1d0b7fb5869ae7ee76043829ed43f746b5dd4ac7a813
 
 def _synthetic(el_ratio=1.0, el_late_ratio=1.0, uni_scale=1.0, uni_late=None,
                fun_ratio=1.0, case3=0, deltas=(1 / 8, 1 / 64)):
-    lo, hi = deltas[0], deltas[-1]
+    hi = deltas[-1]
     res = {"uniform": {}, "elastic": {}, "funnel": {}}
     for d in deltas:
         u = uni_scale * math.log(1 / d) / (1 - d)

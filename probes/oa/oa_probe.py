@@ -136,7 +136,7 @@ class UniformProbing(_Table):
             t += 1
             yield t, _h(self.seed, "u", key, t) % self.n
 
-    def insert(self, key: str) -> int:
+    def insert(self, key: str) -> int:  # pylint: disable=inconsistent-return-statements  # loop returns or raises TableFailure
         for t, slot in self.probe_seq(key):
             if self.slots[slot] is None:
                 return self._put(key, slot, t, t)
