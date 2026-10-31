@@ -1,0 +1,23 @@
+{
+ "status": "PROPOSED / ONGOING. Frozen before the first run of scripts/oa_experiment.py. Do not edit after results exist; add a new file instead.",
+ "frozen_at": "2026-10-30 PT, before running scripts/oa_experiment.py",
+ "disclosure": "Before freezing, one smoke run was seen at n=1024, delta=1/16, seed 0 (uniform amortized 3.76; elastic amortized 146.2, case3 0; funnel amortized 34.9, max 176, bound 228). P4 and P7 were written after seeing it.",
+ "n": 16384,
+ "deltas": [0.125, 0.0625, 0.03125, 0.015625],
+ "seeds": [0, 1, 2],
+ "elastic_c": 2,
+ "metric": "search probe complexity as the paper defines it (index in the 1-D probe sequence; phi(i,j) for elastic). 'late' = mean over the last ceil(1%) of insertions.",
+ "predictions": {
+  "P1": "uniform amortized within +-10% of ln(1/delta)/(1-delta) at every delta (random probing, Sec. 1: Theta(log 1/delta))",
+  "P2": "uniform late-window mean >= 0.5/delta at every delta (worst-case expected O(1/delta), Sec. 1)",
+  "P3": "elastic amortized(1/64) / amortized(1/8) <= 1.35 (Theorem 1: O(1) amortized, flat in delta)",
+  "P4": "elastic amortized > uniform amortized at every tested delta (phi constants: phi(1,1)=13; Theorem 1 is asymptotic)",
+  "P5": "elastic late-ratio (1/64 vs 1/8) < uniform late-ratio (Theorem 1 O(log 1/delta) vs O(1/delta))",
+  "P6": "funnel max probe complexity <= alpha*beta + B cap + 2*C bucket in every run (structural, Sec. 3)",
+  "P7": "funnel late mean >= uniform late mean at every tested delta (Theorem 2 win over Yao is asymptotic; 8 log^2 vs 1/delta crosses only near delta ~ 2^-10)",
+  "P8": "funnel amortized(1/64) / amortized(1/8) <= 3.0 (Theorem 2: O(log 1/delta) amortized)",
+  "P9": "no TableFailure in 36 runs and elastic case-3 insertions total <= 2 (Lemma 2: whp none)",
+  "P10": "zero reordering violations in every run (no_reorder_audit)"
+ },
+ "not_claimed": "The paper proves nothing about AI agents. None of these predictions is about agents. Mapping to receipts is analogy."
+}
