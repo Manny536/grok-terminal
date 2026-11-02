@@ -1,8 +1,9 @@
 """PROPOSED / ONGOING probe tests: causal order x open addressing without reordering.
 
 ANALOGY ONLY (arXiv:2501.02305). Passing here is not validation: same author
-wrote the tests and the mutants. Set OA_MUTANT=<name> to run against a broken
-variant; scripts/oa_mutation_smoke.py counts kills. Keys are synthetic ids (h<1).
+wrote the tests and the broken variants. Set OA_MUTANT=<name> to run against
+a broken variant; scripts/oa_mutation_smoke.py reports DETECTED only when a
+named test fails. Keys are synthetic ids (h<1).
 """
 import math
 import os
