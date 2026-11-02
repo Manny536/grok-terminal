@@ -14,15 +14,11 @@
 # inline with a reason, instead of being added here.
 
 [MAIN]
+py-version=3.9
 init-hook='import sys; sys.path[:0] = ["src", ".", "tests"]'
 
 [MESSAGES CONTROL]
 disable=
-    # import-error: the Pylint workflow installs only pylint, not this repo's
-    # third-party deps (python-docx / numpy / pytest), so their imports cannot
-    # resolve in CI. Remove this once the workflow installs the deps; editing
-    # the workflow needs a token with the GitHub 'workflow' scope.
-    import-error,
     # Conventions, present across pre-existing scripts and docs builders:
     missing-module-docstring, missing-class-docstring, missing-function-docstring,
     invalid-name, line-too-long, missing-final-newline, multiple-statements,
