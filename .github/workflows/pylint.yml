@@ -1,23 +1,52 @@
 name: Pylint
 
-on: [push]
+on:
+  push:
+    branches: [main]
+    paths:
+      - "**/*.py"
+      - "pyproject.toml"
+      - "requirements*.txt"
+      - "requirements/**"
+      - ".pylintrc"
+      - "pylintrc"
+      - "requirements-lint.txt"
+      - "setup.cfg"
+      - ".github/workflows/pylint.yml"
+  pull_request:
+    paths:
+      - "**/*.py"
+      - "pyproject.toml"
+      - "requirements*.txt"
+      - "requirements/**"
+      - ".pylintrc"
+      - "pylintrc"
+      - "requirements-lint.txt"
+      - "setup.cfg"
+      - ".github/workflows/pylint.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pylint-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  build:
+  lint:
+    name: Pylint (Python 3.12)
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.8", "3.9", "3.10"]
     steps:
-    - uses: actions/checkout@v4
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v3
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install pylint
-    - name: Analysing the code with pylint
-      run: |
-        pylint $(git ls-files '*.py')
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install project and lint dependencies
+        run: python -m pip install numpy python-docx pytest "pylint==3.3.9"
+      - name: Lint Python code
+        shell: bash
+        run: |
+          mapfile -d '' files < <(git ls-files -z '*.py')
+          # Keep repository lint rules and import checks; target Python 3.9.
+          python -m pylint --py-version=3.9 "${files[@]}"
