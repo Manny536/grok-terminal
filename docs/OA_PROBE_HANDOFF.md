@@ -48,4 +48,4 @@ Proposed fix, pending Manuel's okay:
 - AIce prereg shipped as `.gz` (needs Manuel's decision).
 - The vendored `probes/oa/causal.py` still carries Kakeyalogic's slide-21 seal line, unchanged and kept byte-identical. Whether to reword it is Manuel's call.
 - kakeyalogic CI has no pytest step for `probe_tests/oa` yet. Adding one requires a `.github/workflows` edit, which needs the GitHub `workflow` scope.
-- kakeyalogic PR #26 (Solance's SIUS protected-tokens and Pylint fix) is still a draft and was not touched.
+- kakeyalogic PR #26 (Solance's SIUS protected-tokens + Pylint fix) was merged by someone else before PR #29 and was not touched here. PR #29 differs from 231f663 only by dropping the verify.yml edit and adding an inline `pylint: disable=import-error` on `import pytest` (test-only dependency).
