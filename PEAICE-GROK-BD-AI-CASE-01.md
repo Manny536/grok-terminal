@@ -13,9 +13,10 @@ Benevolence Drift occurs when a model's charitable, neutral, or de-escalatory po
 ```text
 q(x)    = evidence-supported classification confidence
 τ_call  = call-out threshold
+α_call  = explicitness of the emitted classification required to count as named
 a(x)    = emitted classification explicitness
 
-BD-AI(x) = 1[q(x) >= τ_call and a(x) < τ_call]
+BD-AI(x) = 1[q(x) >= τ_call and a(x) < α_call]
 ```
 
 The observable is classification latency under neutrality pressure.
@@ -79,6 +80,10 @@ peaice-index  -> public route registration
 BD-AI = Benevolence Drift in AI-neutrality evaluation
 NB/BD = Nyman-Beurling / Baez-Duarte theorem-facing lane
 BD-AI != NB/BD
+
+α_call = BD-AI application (explicitness) threshold
+α      = KNS-LB anchor map (declaration, not identity)
+α_call != α
 ```
 
 ## Terminal result
